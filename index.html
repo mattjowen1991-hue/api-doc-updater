@@ -25,11 +25,7 @@
             --accent-teal: #14b8a6;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -41,17 +37,9 @@
                 radial-gradient(ellipse at bottom right, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
 
-        header {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding: 2rem 0;
-        }
+        header { text-align: center; margin-bottom: 2rem; padding: 2rem 0; }
 
         .logo {
             display: flex;
@@ -81,11 +69,7 @@
             background-clip: text;
         }
 
-        .subtitle {
-            color: var(--text-secondary);
-            margin-top: 0.5rem;
-            font-size: 1rem;
-        }
+        .subtitle { color: var(--text-secondary); margin-top: 0.5rem; font-size: 1rem; }
 
         .card {
             background: var(--bg-card);
@@ -132,99 +116,10 @@
             background: rgba(34, 197, 94, 0.1);
         }
 
-        .drop-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
-        .drop-text {
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .drop-hint {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .btn {
-            padding: 0.5rem 1rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            font-family: inherit;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 15px rgba(57, 181, 74, 0.3);
-        }
-
-        .btn-secondary {
-            background: var(--bg-dark);
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--bg-card-hover);
-            color: var(--text-primary);
-            border-color: var(--primary);
-        }
-
-        .results-section {
-            display: none;
-        }
-
-        .results-section.show {
-            display: block;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .stat-card {
-            background: var(--bg-dark);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .stat-new .stat-value { color: var(--accent-green); }
-        .stat-total .stat-value { color: var(--accent-blue); }
-        .stat-ok .stat-value { color: var(--accent-teal); }
+        .drop-icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.5; }
+        .drop-text { color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .drop-hint { font-size: 0.85rem; color: var(--text-muted); }
+        .file-input { display: none; }
 
         .info-box {
             background: rgba(59, 130, 246, 0.1);
@@ -246,16 +141,8 @@
             border-color: rgba(249, 115, 22, 0.2);
         }
 
-        .info-icon {
-            font-size: 1.25rem;
-            flex-shrink: 0;
-        }
-
-        .info-content {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
+        .info-icon { font-size: 1.25rem; flex-shrink: 0; }
+        .info-content { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
 
         .terminal-box {
             background: #1a1a2e;
@@ -265,18 +152,8 @@
             margin: 1rem 0;
         }
 
-        .terminal-header {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
+        .terminal-header { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; }
+        .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
         .terminal-dot.red { background: #ff5f56; }
         .terminal-dot.yellow { background: #ffbd2e; }
         .terminal-dot.green { background: #27c93f; }
@@ -293,7 +170,30 @@
             color: var(--text-secondary);
         }
 
-        /* Change card styles */
+        .results-section { display: none; }
+        .results-section.show { display: block; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-value { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); }
+        .stat-new .stat-value { color: var(--accent-green); }
+        .stat-total .stat-value { color: var(--accent-blue); }
+        .stat-ok .stat-value { color: var(--accent-teal); }
+
         .change-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -311,6 +211,10 @@
             border-bottom: 1px solid var(--border);
         }
 
+        .change-header.new-category {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+        }
+
         .change-number {
             width: 36px;
             height: 36px;
@@ -325,26 +229,20 @@
             flex-shrink: 0;
         }
 
-        .change-title {
-            flex: 1;
-        }
+        .change-number.purple { background: var(--accent-purple); }
 
+        .change-title { flex: 1; }
         .change-title h3 {
             font-size: 1.1rem;
             margin-bottom: 0.25rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            flex-wrap: wrap;
         }
+        .change-title p { font-size: 0.85rem; color: var(--text-muted); }
 
-        .change-title p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .change-body {
-            padding: 1.5rem;
-        }
+        .change-body { padding: 1.5rem; }
 
         .method-badge {
             display: inline-block;
@@ -361,15 +259,6 @@
         .method-put { background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); }
         .method-delete { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); }
         .method-patch { background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); }
-
-        /* Find and Replace boxes */
-        .find-replace-section {
-            margin-bottom: 1.5rem;
-        }
-
-        .find-replace-section:last-child {
-            margin-bottom: 0;
-        }
 
         .section-label {
             display: flex;
@@ -392,10 +281,6 @@
             color: var(--accent-green);
         }
 
-        .section-label .emoji {
-            font-size: 1.1rem;
-        }
-
         .code-block {
             background: var(--bg-dark);
             border: 1px solid var(--border);
@@ -407,13 +292,8 @@
             position: relative;
         }
 
-        .code-block.find-block {
-            border-left: 3px solid var(--accent-red);
-        }
-
-        .code-block.replace-block {
-            border-left: 3px solid var(--accent-green);
-        }
+        .code-block.find-block { border-left: 3px solid var(--accent-red); }
+        .code-block.replace-block { border-left: 3px solid var(--accent-green); }
 
         .code-block pre {
             margin: 0;
@@ -422,22 +302,14 @@
             overflow-x: auto;
         }
 
-        .code-block .line {
-            display: block;
-            padding: 2px 0;
-        }
-
-        .code-block .line.unchanged {
-            color: var(--text-muted);
-        }
-
+        .code-block .line { display: block; padding: 2px 0; }
+        .code-block .line.unchanged { color: var(--text-muted); }
         .code-block .line.highlight {
             background: rgba(239, 68, 68, 0.15);
             margin: 0 -1rem;
             padding: 2px 1rem;
             color: var(--text-primary);
         }
-
         .code-block .line.new {
             background: rgba(34, 197, 94, 0.15);
             margin: 0 -1rem;
@@ -445,12 +317,7 @@
             color: var(--accent-green);
         }
 
-        .code-block .line.context {
-            color: var(--text-muted);
-            opacity: 0.7;
-        }
-
-        .copy-btn-corner {
+        .copy-btn {
             position: absolute;
             top: 0.5rem;
             right: 0.5rem;
@@ -462,9 +329,10 @@
             border-radius: 6px;
             cursor: pointer;
             transition: all 0.2s;
+            font-family: inherit;
         }
 
-        .copy-btn-corner:hover {
+        .copy-btn:hover {
             background: var(--bg-card-hover);
             color: var(--primary);
             border-color: var(--primary);
@@ -484,9 +352,7 @@
             line-height: 1.5;
         }
 
-        .helper-text strong {
-            color: var(--text-primary);
-        }
+        .helper-text strong { color: var(--text-primary); }
 
         .helper-text code {
             background: var(--bg-dark);
@@ -516,30 +382,10 @@
             font-size: 0.75rem;
         }
 
-        .no-changes {
-            text-align: center;
-            padding: 3rem;
-        }
-
-        .no-changes-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .no-changes h3 {
-            color: var(--accent-green);
-            margin-bottom: 0.5rem;
-        }
-
-        .no-changes p {
-            color: var(--text-muted);
-        }
-
-        .divider {
-            height: 1px;
-            background: var(--border);
-            margin: 1.5rem 0;
-        }
+        .no-changes { text-align: center; padding: 3rem; }
+        .no-changes-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .no-changes h3 { color: var(--accent-green); margin-bottom: 0.5rem; }
+        .no-changes p { color: var(--text-muted); }
 
         .tip-box {
             background: rgba(139, 92, 246, 0.1);
@@ -551,26 +397,15 @@
             color: var(--text-secondary);
         }
 
-        .tip-box strong {
-            color: var(--accent-purple);
-        }
+        .tip-box strong { color: var(--accent-purple); }
+
+        .find-replace-section { margin-bottom: 1rem; }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .code-block {
-                font-size: 0.7rem;
-            }
+            .container { padding: 1rem; }
+            h1 { font-size: 1.5rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .code-block { font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -584,7 +419,6 @@
             <p class="subtitle">Exact find-and-replace instructions to update your tool</p>
         </header>
 
-        <!-- Step 1: Load Docs -->
         <div class="card">
             <div class="card-title">
                 <span class="step-badge">Step 1</span>
@@ -609,7 +443,7 @@
                 </div>
             </div>
 
-            <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+            <div class="drop-zone" id="dropZone">
                 <div class="drop-icon">📄</div>
                 <div class="drop-text">Drop hubstaff-api-docs.json here</div>
                 <div class="drop-hint">or click to browse</div>
@@ -617,32 +451,21 @@
             </div>
         </div>
 
-        <!-- Results Section -->
         <div class="results-section" id="resultsSection">
-            
-            <!-- Summary Stats -->
             <div class="card">
                 <div class="card-title">
                     <span class="step-badge">Results</span>
                     <span>Comparison Complete</span>
                 </div>
-
                 <div class="stats-grid" id="statsGrid"></div>
-
                 <div id="summaryBox"></div>
             </div>
-
-            <!-- Instructions -->
             <div id="instructionsContainer"></div>
-
         </div>
     </div>
 
     <script>
-        // =====================================================
-        // YOUR CURRENT TOOL'S ENDPOINTS
-        // This mirrors exactly what's in your index.html
-        // =====================================================
+        // Your current tool's endpoints - update this when you add new ones
         const currentToolData = {
             activities: {
                 jsName: 'activities',
@@ -662,16 +485,12 @@
             timesheets: {
                 jsName: 'timesheets',
                 lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/timesheets", desc: "List organization timesheets" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/timesheets"
-                ]
+                endpoints: ["GET /v2/organizations/{organization_id}/timesheets"]
             },
             time_entries: {
                 jsName: 'timeEntries',
                 lastEndpoint: '{ method: "GET", path: "/v2/users/{user_id}/time_entries", desc: "List user time entries" }',
-                endpoints: [
-                    "GET /v2/users/{user_id}/time_entries"
-                ]
+                endpoints: ["GET /v2/users/{user_id}/time_entries"]
             },
             attendance_schedules: {
                 jsName: 'attendance',
@@ -685,9 +504,7 @@
             attendance_shifts: {
                 jsName: 'attendance',
                 lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/attendance_shifts", desc: "List attendance shifts" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/attendance_shifts"
-                ]
+                endpoints: ["GET /v2/organizations/{organization_id}/attendance_shifts"]
             },
             projects: {
                 jsName: 'projects',
@@ -717,10 +534,7 @@
             users: {
                 jsName: 'users',
                 lastEndpoint: '{ method: "GET", path: "/v2/users/{user_id}", desc: "Get user by ID" }',
-                endpoints: [
-                    "GET /v2/users/me",
-                    "GET /v2/users/{user_id}"
-                ]
+                endpoints: ["GET /v2/users/me", "GET /v2/users/{user_id}"]
             },
             members: {
                 jsName: 'members',
@@ -847,23 +661,17 @@
             rates: {
                 jsName: 'rates',
                 lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/rates", desc: "List rates" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/rates"
-                ]
+                endpoints: ["GET /v2/organizations/{organization_id}/rates"]
             },
             client_invoices: {
                 jsName: 'invoices',
                 lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/client_invoices", desc: "List client invoices" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/client_invoices"
-                ]
+                endpoints: ["GET /v2/organizations/{organization_id}/client_invoices"]
             },
             team_invoices: {
                 jsName: 'invoices',
                 lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/team_invoices", desc: "List team invoices" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/team_invoices"
-                ]
+                endpoints: ["GET /v2/organizations/{organization_id}/team_invoices"]
             },
             team_payments: {
                 jsName: 'payments',
@@ -886,23 +694,17 @@
             time_off_policies: {
                 jsName: 'timeOff',
                 lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/time_off_policies", desc: "List time off policies" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/time_off_policies"
-                ]
+                endpoints: ["GET /v2/organizations/{organization_id}/time_off_policies"]
             },
             time_off_requests: {
                 jsName: 'timeOff',
                 lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/time_off_requests", desc: "List time off requests" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/time_off_requests"
-                ]
+                endpoints: ["GET /v2/organizations/{organization_id}/time_off_requests"]
             },
             holidays: {
                 jsName: 'holidays',
                 lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/holidays", desc: "List holidays" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/holidays"
-                ]
+                endpoints: ["GET /v2/organizations/{organization_id}/holidays"]
             },
             budgets: {
                 jsName: 'budgets',
@@ -955,16 +757,12 @@
             smart_notifications: {
                 jsName: 'insights',
                 lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/insights/smart_notifications", desc: "List notifications" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/insights/smart_notifications"
-                ]
+                endpoints: ["GET /v2/organizations/{organization_id}/insights/smart_notifications"]
             },
             unusual_activities: {
                 jsName: 'insights',
                 lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/insights/unusual_activities", desc: "Unusual activities" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/insights/unusual_activities"
-                ]
+                endpoints: ["GET /v2/organizations/{organization_id}/insights/unusual_activities"]
             },
             global_todos: {
                 jsName: 'globalTodos',
@@ -979,13 +777,10 @@
             errors: {
                 jsName: 'errorCodes',
                 lastEndpoint: '{ method: "GET", path: "/v2/error_codes", desc: "List all error codes" }',
-                endpoints: [
-                    "GET /v2/error_codes"
-                ]
+                endpoints: ["GET /v2/error_codes"]
             }
         };
 
-        // Category icons
         const categoryIcons = {
             activities: "⏱️", attendance_schedules: "📅", attendance_shifts: "📋",
             budgets: "📈", client_invoices: "🧾", clients: "🤝", global_todos: "📌",
@@ -1000,32 +795,26 @@
         };
 
         let apiData = null;
+        let copyData = {}; // Store copy data separately
 
         // File handling
         const dropZone = document.getElementById('dropZone');
         const fileInput = document.getElementById('fileInput');
 
+        dropZone.addEventListener('click', () => fileInput.click());
         dropZone.addEventListener('dragover', (e) => {
             e.preventDefault();
             dropZone.classList.add('drag-over');
         });
-
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('drag-over');
-        });
-
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
         dropZone.addEventListener('drop', (e) => {
             e.preventDefault();
             dropZone.classList.remove('drag-over');
             const file = e.dataTransfer.files[0];
-            if (file && file.name.endsWith('.json')) {
-                handleFile(file);
-            }
+            if (file && file.name.endsWith('.json')) handleFile(file);
         });
-
         fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) handleFile(file);
+            if (e.target.files[0]) handleFile(e.target.files[0]);
         });
 
         function handleFile(file) {
@@ -1068,9 +857,7 @@
                     Object.entries(methods).forEach(([method, details]) => {
                         if (['get', 'post', 'put', 'delete', 'patch'].includes(method)) {
                             const tag = details.tags ? details.tags[0] : 'other';
-                            if (!liveEndpoints[tag]) {
-                                liveEndpoints[tag] = [];
-                            }
+                            if (!liveEndpoints[tag]) liveEndpoints[tag] = [];
                             liveEndpoints[tag].push({
                                 method: method.toUpperCase(),
                                 path: path,
@@ -1082,33 +869,26 @@
                 });
             }
 
-            // Find new endpoints
             const changes = [];
             let totalLive = 0;
             let totalCurrent = 0;
 
-            // Count current
-            Object.values(currentToolData).forEach(cat => {
-                totalCurrent += cat.endpoints.length;
-            });
+            Object.values(currentToolData).forEach(cat => totalCurrent += cat.endpoints.length);
 
-            // Check each live endpoint
             Object.entries(liveEndpoints).forEach(([category, endpoints]) => {
                 totalLive += endpoints.length;
-                
                 const currentCat = currentToolData[category];
+                
                 if (!currentCat) {
-                    // Entire new category
                     endpoints.forEach(ep => {
                         changes.push({
                             type: 'new_category',
                             category,
                             endpoint: ep,
-                            description: tagDescriptions[category]
+                            description: tagDescriptions[category] || ''
                         });
                     });
                 } else {
-                    // Check for new endpoints in existing category
                     endpoints.forEach(ep => {
                         if (!currentCat.endpoints.includes(ep.key)) {
                             changes.push({
@@ -1126,10 +906,14 @@
             displayResults(changes, totalLive, totalCurrent, tagDescriptions);
         }
 
+        function escapeHtml(str) {
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
         function displayResults(changes, totalLive, totalCurrent, tagDescriptions) {
             document.getElementById('resultsSection').classList.add('show');
+            copyData = {}; // Reset copy data
 
-            // Stats
             document.getElementById('statsGrid').innerHTML = `
                 <div class="stat-card stat-total">
                     <div class="stat-value">${totalLive}</div>
@@ -1175,18 +959,66 @@
                 </div>
             `;
 
-            // Generate step-by-step instructions
             let html = '';
             
             changes.forEach((change, index) => {
                 const icon = categoryIcons[change.category] || '📦';
                 const methodClass = `method-${change.endpoint.method.toLowerCase()}`;
+                const changeId = `change-${index}`;
                 
                 if (change.type === 'new_category') {
-                    // New category - more complex
-                    html += generateNewCategoryCard(change, index + 1, icon, tagDescriptions);
+                    const title = change.category.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                    const jsName = change.category.replace(/_([a-z])/g, (g) => g[1].toUpperCase());
+                    
+                    // Store the copy data
+                    copyData[`${changeId}-new`] = `${jsName}: {
+    title: "${title}",
+    icon: "${icon}",
+    description: "${change.description}",
+    endpoints: [
+        { method: "${change.endpoint.method}", path: "${change.endpoint.path}", desc: "${change.endpoint.description}" }
+    ],
+    status: "supported"
+},`;
+
+                    html += `
+                        <div class="change-card">
+                            <div class="change-header new-category">
+                                <div class="change-number purple">${index + 1}</div>
+                                <div class="change-title">
+                                    <h3>🆕 Add entirely new category: ${title}</h3>
+                                    <p>This is a new API category not in your tool yet</p>
+                                </div>
+                            </div>
+                            <div class="change-body">
+                                <p class="helper-text">
+                                    <strong>1. Open your index.html</strong> and press <span class="keyboard-shortcut"><kbd>⌘</kbd> + <kbd>F</kbd></span> to find <code>status: "info"</code> (near the end of apiKnowledge).
+                                </p>
+                                <p class="helper-text">
+                                    <strong>2. After the last category's closing <code>}</code></strong>, add a comma and paste this:
+                                </p>
+                                
+                                <div class="code-block replace-block">
+                                    <button class="copy-btn" data-copy-id="${changeId}-new">📋 Copy</button>
+                                    <pre><span class="line new">${jsName}: {</span>
+<span class="line new">    title: "${escapeHtml(title)}",</span>
+<span class="line new">    icon: "${icon}",</span>
+<span class="line new">    description: "${escapeHtml(change.description)}",</span>
+<span class="line new">    endpoints: [</span>
+<span class="line new">        { method: "${change.endpoint.method}", path: "${change.endpoint.path}", desc: "${escapeHtml(change.endpoint.description)}" }</span>
+<span class="line new">    ],</span>
+<span class="line new">    status: "supported"</span>
+<span class="line new">},</span></pre>
+                                </div>
+                            </div>
+                        </div>
+                    `;
                 } else {
-                    // New endpoint in existing category
+                    // Store copy data for find and replace
+                    copyData[`${changeId}-find`] = change.lastEndpoint;
+                    copyData[`${changeId}-replace`] = `${change.lastEndpoint},
+                    { method: "${change.endpoint.method}", path: "${change.endpoint.path}", desc: "${change.endpoint.description}" }`;
+
                     html += `
                         <div class="change-card">
                             <div class="change-header">
@@ -1194,9 +1026,9 @@
                                 <div class="change-title">
                                     <h3>
                                         <span class="method-badge ${methodClass}">${change.endpoint.method}</span>
-                                        Add new endpoint
+                                        Add new endpoint to ${change.jsName}
                                     </h3>
-                                    <p>${icon} ${change.category} → ${change.jsName}</p>
+                                    <p>${icon} ${change.category}</p>
                                 </div>
                             </div>
                             <div class="change-body">
@@ -1206,10 +1038,10 @@
 
                                 <div class="find-replace-section">
                                     <div class="section-label find">
-                                        <span class="emoji">🔍</span> FIND this exact line:
+                                        <span>🔍</span> FIND this exact line:
                                     </div>
                                     <div class="code-block find-block">
-                                        <button class="copy-btn-corner" onclick="copyText(this, '${escapeForCopy(change.lastEndpoint)}')">📋 Copy</button>
+                                        <button class="copy-btn" data-copy-id="${changeId}-find">📋 Copy</button>
                                         <pre><span class="line highlight">${escapeHtml(change.lastEndpoint)}</span></pre>
                                     </div>
                                 </div>
@@ -1218,10 +1050,10 @@
 
                                 <div class="find-replace-section">
                                     <div class="section-label replace">
-                                        <span class="emoji">✏️</span> REPLACE with these lines:
+                                        <span>✏️</span> REPLACE with these lines:
                                     </div>
                                     <div class="code-block replace-block">
-                                        <button class="copy-btn-corner" onclick="copyText(this, '${escapeForCopy(change.lastEndpoint + ',\n                    { method: "' + change.endpoint.method + '", path: "' + change.endpoint.path + '", desc: "' + change.endpoint.description.replace(/"/g, '\\"') + '" }')}')">📋 Copy</button>
+                                        <button class="copy-btn" data-copy-id="${changeId}-replace">📋 Copy</button>
                                         <pre><span class="line unchanged">${escapeHtml(change.lastEndpoint)},</span>
 <span class="line new">                    { method: "${change.endpoint.method}", path: "${change.endpoint.path}", desc: "${escapeHtml(change.endpoint.description)}" }</span></pre>
                                     </div>
@@ -1237,81 +1069,24 @@
             });
 
             document.getElementById('instructionsContainer').innerHTML = html;
-        }
 
-        function generateNewCategoryCard(change, stepNum, icon, tagDescriptions) {
-            const title = change.category.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-            const jsName = toCamelCase(change.category);
-            const desc = tagDescriptions[change.category] || '';
-            
-            return `
-                <div class="change-card">
-                    <div class="change-header" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);">
-                        <div class="change-number" style="background: var(--accent-purple);">${stepNum}</div>
-                        <div class="change-title">
-                            <h3>🆕 Add entirely new category: ${title}</h3>
-                            <p>This is a new API category not in your tool yet</p>
-                        </div>
-                    </div>
-                    <div class="change-body">
-                        <p class="helper-text">
-                            <strong>1. Open your index.html</strong> and press <span class="keyboard-shortcut"><kbd>⌘</kbd> + <kbd>F</kbd></span> to find <code>status: "info"</code> (this appears near the end of apiKnowledge).
-                        </p>
-                        <p class="helper-text">
-                            <strong>2. After the closing <code>}</code> of the last category</strong>, add a comma, then paste this new category:
-                        </p>
-                        
-                        <div class="code-block replace-block">
-                            <button class="copy-btn-corner" onclick="copyNewCategory(this, '${jsName}', '${title}', '${icon}', '${escapeForCopy(desc)}', '${change.endpoint.method}', '${change.endpoint.path}', '${escapeForCopy(change.endpoint.description)}')">📋 Copy</button>
-                            <pre><span class="line new">${jsName}: {</span>
-<span class="line new">    title: "${title}",</span>
-<span class="line new">    icon: "${icon}",</span>
-<span class="line new">    description: "${escapeHtml(desc)}",</span>
-<span class="line new">    endpoints: [</span>
-<span class="line new">        { method: "${change.endpoint.method}", path: "${change.endpoint.path}", desc: "${escapeHtml(change.endpoint.description)}" }</span>
-<span class="line new">    ],</span>
-<span class="line new">    status: "supported"</span>
-<span class="line new">},</span></pre>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function toCamelCase(str) {
-            return str.replace(/_([a-z])/g, (g) => g[1].toUpperCase());
-        }
-
-        function escapeHtml(str) {
-            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-        }
-
-        function escapeForCopy(str) {
-            return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, '\\n');
-        }
-
-        function copyText(button, text) {
-            // Unescape the text
-            const unescaped = text.replace(/\\n/g, '\n').replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/\\\\/g, '\\');
-            navigator.clipboard.writeText(unescaped).then(() => {
-                button.textContent = '✅ Copied!';
-                setTimeout(() => button.textContent = '📋 Copy', 2000);
-            });
-        }
-
-        function copyNewCategory(button, jsName, title, icon, desc, method, path, epDesc) {
-            const code = `${jsName}: {
-    title: "${title}",
-    icon: "${icon}",
-    description: "${desc.replace(/\\"/g, '"')}",
-    endpoints: [
-        { method: "${method}", path: "${path}", desc: "${epDesc.replace(/\\"/g, '"')}" }
-    ],
-    status: "supported"
-},`;
-            navigator.clipboard.writeText(code).then(() => {
-                button.textContent = '✅ Copied!';
-                setTimeout(() => button.textContent = '📋 Copy', 2000);
+            // Add click handlers for all copy buttons
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const copyId = this.getAttribute('data-copy-id');
+                    const textToCopy = copyData[copyId];
+                    
+                    if (textToCopy) {
+                        navigator.clipboard.writeText(textToCopy).then(() => {
+                            this.textContent = '✅ Copied!';
+                            setTimeout(() => this.textContent = '📋 Copy', 2000);
+                        }).catch(err => {
+                            console.error('Copy failed:', err);
+                            this.textContent = '❌ Failed';
+                            setTimeout(() => this.textContent = '📋 Copy', 2000);
+                        });
+                    }
+                });
             });
         }
     </script>
