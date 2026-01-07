@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hubstaff API Docs Updater v2</title>
+    <title>Hubstaff API Docs Updater v3</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -42,7 +42,7 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -223,7 +223,6 @@
         }
 
         .stat-new .stat-value { color: var(--accent-green); }
-        .stat-removed .stat-value { color: var(--accent-red); }
         .stat-total .stat-value { color: var(--accent-blue); }
         .stat-ok .stat-value { color: var(--accent-teal); }
 
@@ -245,11 +244,6 @@
         .info-box.warning {
             background: rgba(249, 115, 22, 0.1);
             border-color: rgba(249, 115, 22, 0.2);
-        }
-
-        .info-box.new {
-            background: rgba(139, 92, 246, 0.1);
-            border-color: rgba(139, 92, 246, 0.2);
         }
 
         .info-icon {
@@ -299,32 +293,27 @@
             color: var(--text-secondary);
         }
 
-        /* Step-by-step instruction styles */
-        .instruction-card {
+        /* Change card styles */
+        .change-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 16px;
             margin-bottom: 1.5rem;
             overflow: hidden;
         }
 
-        .instruction-header {
+        .change-header {
             display: flex;
             align-items: center;
             gap: 1rem;
-            padding: 1rem 1.25rem;
-            background: var(--bg-dark);
+            padding: 1.25rem;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
             border-bottom: 1px solid var(--border);
-            cursor: pointer;
         }
 
-        .instruction-header:hover {
-            background: var(--bg-card-hover);
-        }
-
-        .instruction-number {
-            width: 32px;
-            height: 32px;
+        .change-number {
+            width: 36px;
+            height: 36px;
             background: var(--accent-green);
             color: white;
             border-radius: 50%;
@@ -332,122 +321,29 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 1rem;
             flex-shrink: 0;
         }
 
-        .instruction-number.new { background: var(--accent-purple); }
-        .instruction-number.warning { background: var(--accent-orange); }
-
-        .instruction-title {
+        .change-title {
             flex: 1;
         }
 
-        .instruction-title h3 {
-            font-size: 1rem;
+        .change-title h3 {
+            font-size: 1.1rem;
             margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .instruction-title p {
+        .change-title p {
             font-size: 0.85rem;
             color: var(--text-muted);
         }
 
-        .instruction-badge {
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .instruction-badge.new {
-            background: rgba(34, 197, 94, 0.15);
-            color: var(--accent-green);
-        }
-
-        .instruction-badge.category {
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--accent-blue);
-        }
-
-        .instruction-toggle {
-            color: var(--text-muted);
-            font-size: 1.25rem;
-        }
-
-        .instruction-body {
-            display: none;
-            padding: 1.25rem;
-        }
-
-        .instruction-body.open {
-            display: block;
-        }
-
-        .instruction-step {
-            margin-bottom: 1.5rem;
-        }
-
-        .instruction-step:last-child {
-            margin-bottom: 0;
-        }
-
-        .step-label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: var(--accent-blue);
-        }
-
-        .step-label .emoji {
-            font-size: 1.1rem;
-        }
-
-        .code-block {
-            background: var(--bg-dark);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            overflow-x: auto;
-            position: relative;
-        }
-
-        .code-block pre {
-            margin: 0;
-            color: var(--text-secondary);
-            white-space: pre-wrap;
-            word-break: break-all;
-        }
-
-        .code-block .highlight {
-            background: rgba(57, 181, 74, 0.2);
-            color: var(--accent-green);
-            padding: 0.1rem 0.25rem;
-            border-radius: 3px;
-        }
-
-        .code-block .comment {
-            color: var(--text-muted);
-        }
-
-        .code-block .new-line {
-            background: rgba(34, 197, 94, 0.15);
-            display: block;
-            margin: 0 -1rem;
-            padding: 0.25rem 1rem;
-            border-left: 3px solid var(--accent-green);
-        }
-
-        .copy-btn-inline {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            padding: 0.25rem 0.5rem;
-            font-size: 0.75rem;
+        .change-body {
+            padding: 1.5rem;
         }
 
         .method-badge {
@@ -466,16 +362,158 @@
         .method-delete { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); }
         .method-patch { background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); }
 
-        .endpoint-preview {
+        /* Find and Replace boxes */
+        .find-replace-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .find-replace-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-label {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.75rem;
-            background: var(--bg-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem 0.75rem;
             border-radius: 8px;
-            margin: 0.5rem 0;
+        }
+
+        .section-label.find {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--accent-red);
+        }
+
+        .section-label.replace {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--accent-green);
+        }
+
+        .section-label .emoji {
+            font-size: 1.1rem;
+        }
+
+        .code-block {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
             font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block.find-block {
+            border-left: 3px solid var(--accent-red);
+        }
+
+        .code-block.replace-block {
+            border-left: 3px solid var(--accent-green);
+        }
+
+        .code-block pre {
+            margin: 0;
+            color: var(--text-secondary);
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .code-block .line {
+            display: block;
+            padding: 2px 0;
+        }
+
+        .code-block .line.unchanged {
+            color: var(--text-muted);
+        }
+
+        .code-block .line.highlight {
+            background: rgba(239, 68, 68, 0.15);
+            margin: 0 -1rem;
+            padding: 2px 1rem;
+            color: var(--text-primary);
+        }
+
+        .code-block .line.new {
+            background: rgba(34, 197, 94, 0.15);
+            margin: 0 -1rem;
+            padding: 2px 1rem;
+            color: var(--accent-green);
+        }
+
+        .code-block .line.context {
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+
+        .copy-btn-corner {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.75rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn-corner:hover {
+            background: var(--bg-card-hover);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .arrow-down {
+            text-align: center;
+            padding: 0.75rem;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+        }
+
+        .helper-text {
             font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .helper-text strong {
+            color: var(--text-primary);
+        }
+
+        .helper-text code {
+            background: var(--bg-dark);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+        }
+
+        .keyboard-shortcut {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: var(--bg-dark);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .keyboard-shortcut kbd {
+            background: var(--bg-card);
+            padding: 0.1rem 0.35rem;
+            border-radius: 3px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
         }
 
         .no-changes {
@@ -497,32 +535,24 @@
             color: var(--text-muted);
         }
 
-        .section-divider {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 2rem 0;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        .section-divider::before,
-        .section-divider::after {
-            content: '';
-            flex: 1;
+        .divider {
             height: 1px;
             background: var(--border);
+            margin: 1.5rem 0;
         }
 
-        .category-tag {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            background: rgba(139, 92, 246, 0.15);
+        .tip-box {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .tip-box strong {
             color: var(--accent-purple);
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-left: 0.5rem;
         }
 
         @media (max-width: 768px) {
@@ -538,8 +568,8 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .instruction-header {
-                flex-wrap: wrap;
+            .code-block {
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -551,7 +581,7 @@
                 <div class="logo-icon">🔄</div>
                 <h1>API Docs Updater</h1>
             </div>
-            <p class="subtitle">Step-by-step instructions to keep your Hubstaff API Assistant up to date</p>
+            <p class="subtitle">Exact find-and-replace instructions to update your tool</p>
         </header>
 
         <!-- Step 1: Load Docs -->
@@ -564,7 +594,7 @@
             <div class="info-box">
                 <span class="info-icon">💡</span>
                 <div class="info-content">
-                    <strong>First, get the latest docs:</strong> Run this command in Terminal, then drag the file here.
+                    <strong>First, get the latest docs:</strong> Run this in Terminal, then drag the file here.
                 </div>
             </div>
 
@@ -593,8 +623,8 @@
             <!-- Summary Stats -->
             <div class="card">
                 <div class="card-title">
-                    <span class="step-badge">Step 2</span>
-                    <span>Review Changes</span>
+                    <span class="step-badge">Results</span>
+                    <span>Comparison Complete</span>
                 </div>
 
                 <div class="stats-grid" id="statsGrid"></div>
@@ -602,7 +632,7 @@
                 <div id="summaryBox"></div>
             </div>
 
-            <!-- Step-by-step Instructions -->
+            <!-- Instructions -->
             <div id="instructionsContainer"></div>
 
         </div>
@@ -611,284 +641,362 @@
     <script>
         // =====================================================
         // YOUR CURRENT TOOL'S ENDPOINTS
-        // Update this list when you add endpoints to your tool
+        // This mirrors exactly what's in your index.html
         // =====================================================
-        const currentToolEndpoints = {
-            activities: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/activities" },
-                { method: "GET", path: "/v2/organizations/{organization_id}/activities/updates" },
-                { method: "GET", path: "/v2/organizations/{organization_id}/activities/daily" },
-                { method: "GET", path: "/v2/organizations/{organization_id}/activities/daily/updates" },
-                { method: "GET", path: "/v2/organizations/{organization_id}/last_activities" },
-                { method: "GET", path: "/v2/projects/{project_id}/activities" },
-                { method: "GET", path: "/v2/projects/{project_id}/activities/updates" },
-                { method: "GET", path: "/v2/projects/{project_id}/activities/daily" },
-                { method: "GET", path: "/v2/projects/{project_id}/last_activities" }
-            ],
-            timesheets: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/timesheets" }
-            ],
-            time_entries: [
-                { method: "GET", path: "/v2/users/{user_id}/time_entries" }
-            ],
-            attendance_schedules: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/attendance_schedules" },
-                { method: "POST", path: "/v2/organizations/{organization_id}/attendance_schedules" },
-                { method: "PUT", path: "/v2/attendance_schedules/{attendance_schedule_id}" }
-            ],
-            attendance_shifts: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/attendance_shifts" }
-            ],
-            projects: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/projects" },
-                { method: "POST", path: "/v2/organizations/{organization_id}/projects" },
-                { method: "GET", path: "/v2/projects/{project_id}" },
-                { method: "PUT", path: "/v2/projects/{project_id}" },
-                { method: "PUT", path: "/v2/projects/{project_id}/update_metadata" }
-            ],
-            tasks: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/tasks" },
-                { method: "GET", path: "/v2/projects/{project_id}/tasks" },
-                { method: "POST", path: "/v2/projects/{project_id}/tasks" },
-                { method: "GET", path: "/v2/tasks/{task_id}" },
-                { method: "PUT", path: "/v2/tasks/{task_id}" },
-                { method: "DELETE", path: "/v2/tasks/{task_id}" },
-                { method: "PUT", path: "/v2/tasks/{task_id}/update_metadata" },
-                { method: "GET", path: "/v2/integrations/{integration_id}/tasks" }
-            ],
-            users: [
-                { method: "GET", path: "/v2/users/me" },
-                { method: "GET", path: "/v2/users/{user_id}" }
-            ],
-            members: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/members" },
-                { method: "POST", path: "/v2/organizations/{organization_id}/members" },
-                { method: "PUT", path: "/v2/organizations/{organization_id}/update_members" },
-                { method: "GET", path: "/v2/projects/{project_id}/members" },
-                { method: "PUT", path: "/v2/projects/{project_id}/update_members" },
-                { method: "GET", path: "/v2/teams/{team_id}/members" },
-                { method: "PUT", path: "/v2/teams/{team_id}/update_members" }
-            ],
-            teams: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/teams" },
-                { method: "POST", path: "/v2/organizations/{organization_id}/teams" },
-                { method: "GET", path: "/v2/teams/{team_id}" },
-                { method: "PUT", path: "/v2/teams/{team_id}" },
-                { method: "DELETE", path: "/v2/teams/{team_id}" },
-                { method: "GET", path: "/v2/teams/{team_id}/projects" },
-                { method: "PUT", path: "/v2/teams/{team_id}/update_projects" },
-                { method: "PUT", path: "/v2/teams/{team_id}/update_metadata" }
-            ],
-            organizations: [
-                { method: "GET", path: "/v2/organizations" },
-                { method: "POST", path: "/v2/organizations" },
-                { method: "GET", path: "/v2/organizations/{organization_id}" },
-                { method: "PUT", path: "/v2/organizations/{organization_id}/update_metadata" },
-                { method: "GET", path: "/v2/organizations/{organization_id}/work_break_projects" }
-            ],
-            screenshots: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/screenshots" },
-                { method: "GET", path: "/v2/organizations/{organization_id}/screenshots/{screenshot_id}" },
-                { method: "GET", path: "/v2/projects/{project_id}/screenshots" },
-                { method: "GET", path: "/v2/projects/{project_id}/screenshots/{screenshot_id}" }
-            ],
-            job_sites: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/job_sites" },
-                { method: "POST", path: "/v2/organizations/{organization_id}/job_sites" },
-                { method: "GET", path: "/v2/job_sites/{job_site_id}" },
-                { method: "PUT", path: "/v2/job_sites/{job_site_id}" },
-                { method: "PUT", path: "/v2/job_sites/{job_site_id}/update_rules" },
-                { method: "PUT", path: "/v2/job_sites/{job_site_id}/add_rules" },
-                { method: "PUT", path: "/v2/job_sites/{job_site_id}/remove_rules" }
-            ],
-            job_site_visits: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/job_site_visits" },
-                { method: "GET", path: "/v2/organizations/{organization_id}/passive_job_site_visits" }
-            ],
-            locations: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/locations" },
-                { method: "GET", path: "/v2/projects/{project_id}/locations" }
-            ],
-            webhooks: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/webhooks" },
-                { method: "POST", path: "/v2/organizations/{organization_id}/webhooks" },
-                { method: "GET", path: "/v2/projects/{project_id}/webhooks" },
-                { method: "GET", path: "/v2/users/me/webhooks" },
-                { method: "GET", path: "/v2/webhooks/{webhook_id}" },
-                { method: "DELETE", path: "/v2/webhooks/{webhook_id}" },
-                { method: "POST", path: "/v2/webhooks/{webhook_id}/activate" }
-            ],
-            clients: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/clients" },
-                { method: "POST", path: "/v2/organizations/{organization_id}/clients" },
-                { method: "GET", path: "/v2/clients/{client_id}" },
-                { method: "PUT", path: "/v2/clients/{client_id}" },
-                { method: "PUT", path: "/v2/clients/{client_id}/update_metadata" }
-            ],
-            invites: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/invites" },
-                { method: "POST", path: "/v2/organizations/{organization_id}/invites" },
-                { method: "POST", path: "/v2/organizations/{organization_id}/invites/bulk" },
-                { method: "GET", path: "/v2/invites/{invite_id}" },
-                { method: "PUT", path: "/v2/invites/{invite_id}" },
-                { method: "DELETE", path: "/v2/invites/{invite_id}" }
-            ],
-            notes: [
-                { method: "GET", path: "/v2/notes/{note_id}" },
-                { method: "GET", path: "/v2/organizations/{organization_id}/notes" },
-                { method: "GET", path: "/v2/projects/{project_id}/notes" }
-            ],
-            rates: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/rates" }
-            ],
-            client_invoices: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/client_invoices" }
-            ],
-            team_invoices: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/team_invoices" }
-            ],
-            team_payments: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/team_payments" },
-                { method: "GET", path: "/v2/team_payments/{team_payment_id}" }
-            ],
-            tool_usages: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/tool_usages" },
-                { method: "GET", path: "/v2/organizations/{organization_id}/tool_usages/daily" },
-                { method: "GET", path: "/v2/projects/{project_id}/tool_usages" },
-                { method: "GET", path: "/v2/projects/{project_id}/tool_usages/daily" }
-            ],
-            time_off_policies: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/time_off_policies" }
-            ],
-            time_off_requests: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/time_off_requests" }
-            ],
-            holidays: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/holidays" }
-            ],
-            budgets: [
-                { method: "GET", path: "/v2/budget_histories/{budget_history_id}" },
-                { method: "GET", path: "/v2/clients/{client_id}/budget_histories" },
-                { method: "GET", path: "/v2/organizations/{organization_id}/budget_histories" },
-                { method: "GET", path: "/v2/projects/{project_id}/budget_histories" }
-            ],
-            limits: [
-                { method: "GET", path: "/v2/limit_histories/{limit_history_id}" },
-                { method: "GET", path: "/v2/organizations/{organization_id}/limit_histories" }
-            ],
-            integrations: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/integrations" },
-                { method: "GET", path: "/v2/integrations/{integration_id}/project_links" },
-                { method: "GET", path: "/v2/integrations/{integration_id}/user_links" },
-                { method: "GET", path: "/v2/projects/{project_id}/integration_links" }
-            ],
-            time_edit_logs: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/time_edit_logs" },
-                { method: "GET", path: "/v2/projects/{project_id}/time_edit_logs" }
-            ],
-            smart_notification_rules: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/insights/smart_notification_rules" },
-                { method: "POST", path: "/v2/organizations/{organization_id}/insights/smart_notification_rules" },
-                { method: "GET", path: "/v2/insights/smart_notification_rules/{rule_id}" },
-                { method: "PUT", path: "/v2/insights/smart_notification_rules/{rule_id}" },
-                { method: "DELETE", path: "/v2/insights/smart_notification_rules/{rule_id}" },
-                { method: "POST", path: "/v2/insights/smart_notification_rules/{rule_id}/toggle_status" }
-            ],
-            smart_notifications: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/insights/smart_notifications" }
-            ],
-            unusual_activities: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/insights/unusual_activities" }
-            ],
-            global_todos: [
-                { method: "GET", path: "/v2/organizations/{organization_id}/global_todos" },
-                { method: "POST", path: "/v2/organizations/{organization_id}/global_todos" },
-                { method: "GET", path: "/v2/organizations/{organization_id}/global_todos/{id}" },
-                { method: "PUT", path: "/v2/organizations/{organization_id}/global_todos/{id}" }
-            ],
-            errors: [
-                { method: "GET", path: "/v2/error_codes" }
-            ]
-        };
-
-        // Category name mapping for your tool
-        const categoryMapping = {
-            'activities': 'activities',
-            'attendance_schedules': 'attendance',
-            'attendance_shifts': 'attendance',
-            'budgets': 'budgets',
-            'client_invoices': 'invoices',
-            'clients': 'clients',
-            'global_todos': 'globalTodos',
-            'holidays': 'holidays',
-            'integrations': 'integrations',
-            'invites': 'invites',
-            'job_site_visits': 'jobSiteVisits',
-            'job_sites': 'jobSites',
-            'limits': 'limits',
-            'locations': 'locations',
-            'members': 'members',
-            'notes': 'notes',
-            'organizations': 'organizations',
-            'projects': 'projects',
-            'rates': 'rates',
-            'screenshots': 'screenshots',
-            'smart_notification_rules': 'insights',
-            'smart_notifications': 'insights',
-            'tasks': 'tasks',
-            'team_invoices': 'invoices',
-            'team_payments': 'payments',
-            'teams': 'teams',
-            'time_edit_logs': 'timeEditLogs',
-            'time_entries': 'timeEntries',
-            'time_off_policies': 'timeOff',
-            'time_off_requests': 'timeOff',
-            'timesheets': 'timesheets',
-            'tool_usages': 'toolUsages',
-            'unusual_activities': 'insights',
-            'users': 'users',
-            'webhooks': 'webhooks',
-            'errors': 'errorCodes'
+        const currentToolData = {
+            activities: {
+                jsName: 'activities',
+                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/last_activities", desc: "Get project last activities" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/activities",
+                    "GET /v2/organizations/{organization_id}/activities/updates",
+                    "GET /v2/organizations/{organization_id}/activities/daily",
+                    "GET /v2/organizations/{organization_id}/activities/daily/updates",
+                    "GET /v2/organizations/{organization_id}/last_activities",
+                    "GET /v2/projects/{project_id}/activities",
+                    "GET /v2/projects/{project_id}/activities/updates",
+                    "GET /v2/projects/{project_id}/activities/daily",
+                    "GET /v2/projects/{project_id}/last_activities"
+                ]
+            },
+            timesheets: {
+                jsName: 'timesheets',
+                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/timesheets", desc: "List organization timesheets" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/timesheets"
+                ]
+            },
+            time_entries: {
+                jsName: 'timeEntries',
+                lastEndpoint: '{ method: "GET", path: "/v2/users/{user_id}/time_entries", desc: "List user time entries" }',
+                endpoints: [
+                    "GET /v2/users/{user_id}/time_entries"
+                ]
+            },
+            attendance_schedules: {
+                jsName: 'attendance',
+                lastEndpoint: '{ method: "PUT", path: "/v2/attendance_schedules/{attendance_schedule_id}", desc: "Update attendance schedule" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/attendance_schedules",
+                    "POST /v2/organizations/{organization_id}/attendance_schedules",
+                    "PUT /v2/attendance_schedules/{attendance_schedule_id}"
+                ]
+            },
+            attendance_shifts: {
+                jsName: 'attendance',
+                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/attendance_shifts", desc: "List attendance shifts" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/attendance_shifts"
+                ]
+            },
+            projects: {
+                jsName: 'projects',
+                lastEndpoint: '{ method: "PUT", path: "/v2/projects/{project_id}/update_metadata", desc: "Update project metadata" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/projects",
+                    "POST /v2/organizations/{organization_id}/projects",
+                    "GET /v2/projects/{project_id}",
+                    "PUT /v2/projects/{project_id}",
+                    "PUT /v2/projects/{project_id}/update_metadata"
+                ]
+            },
+            tasks: {
+                jsName: 'tasks',
+                lastEndpoint: '{ method: "GET", path: "/v2/integrations/{integration_id}/tasks", desc: "List integration tasks" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/tasks",
+                    "GET /v2/projects/{project_id}/tasks",
+                    "POST /v2/projects/{project_id}/tasks",
+                    "GET /v2/tasks/{task_id}",
+                    "PUT /v2/tasks/{task_id}",
+                    "DELETE /v2/tasks/{task_id}",
+                    "PUT /v2/tasks/{task_id}/update_metadata",
+                    "GET /v2/integrations/{integration_id}/tasks"
+                ]
+            },
+            users: {
+                jsName: 'users',
+                lastEndpoint: '{ method: "GET", path: "/v2/users/{user_id}", desc: "Get user by ID" }',
+                endpoints: [
+                    "GET /v2/users/me",
+                    "GET /v2/users/{user_id}"
+                ]
+            },
+            members: {
+                jsName: 'members',
+                lastEndpoint: '{ method: "PUT", path: "/v2/teams/{team_id}/update_members", desc: "Update team members" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/members",
+                    "POST /v2/organizations/{organization_id}/members",
+                    "PUT /v2/organizations/{organization_id}/update_members",
+                    "GET /v2/projects/{project_id}/members",
+                    "PUT /v2/projects/{project_id}/update_members",
+                    "GET /v2/teams/{team_id}/members",
+                    "PUT /v2/teams/{team_id}/update_members"
+                ]
+            },
+            teams: {
+                jsName: 'teams',
+                lastEndpoint: '{ method: "PUT", path: "/v2/teams/{team_id}/update_metadata", desc: "Update team metadata" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/teams",
+                    "POST /v2/organizations/{organization_id}/teams",
+                    "GET /v2/teams/{team_id}",
+                    "PUT /v2/teams/{team_id}",
+                    "DELETE /v2/teams/{team_id}",
+                    "GET /v2/teams/{team_id}/projects",
+                    "PUT /v2/teams/{team_id}/update_projects",
+                    "PUT /v2/teams/{team_id}/update_metadata"
+                ]
+            },
+            organizations: {
+                jsName: 'organizations',
+                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/work_break_projects", desc: "Get work break projects" }',
+                endpoints: [
+                    "GET /v2/organizations",
+                    "POST /v2/organizations",
+                    "GET /v2/organizations/{organization_id}",
+                    "PUT /v2/organizations/{organization_id}/update_metadata",
+                    "GET /v2/organizations/{organization_id}/work_break_projects"
+                ]
+            },
+            screenshots: {
+                jsName: 'screenshots',
+                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/screenshots/{screenshot_id}", desc: "Get project screenshot" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/screenshots",
+                    "GET /v2/organizations/{organization_id}/screenshots/{screenshot_id}",
+                    "GET /v2/projects/{project_id}/screenshots",
+                    "GET /v2/projects/{project_id}/screenshots/{screenshot_id}"
+                ]
+            },
+            job_sites: {
+                jsName: 'jobSites',
+                lastEndpoint: '{ method: "PUT", path: "/v2/job_sites/{job_site_id}/remove_rules", desc: "Remove geofence rules" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/job_sites",
+                    "POST /v2/organizations/{organization_id}/job_sites",
+                    "GET /v2/job_sites/{job_site_id}",
+                    "PUT /v2/job_sites/{job_site_id}",
+                    "PUT /v2/job_sites/{job_site_id}/update_rules",
+                    "PUT /v2/job_sites/{job_site_id}/add_rules",
+                    "PUT /v2/job_sites/{job_site_id}/remove_rules"
+                ]
+            },
+            job_site_visits: {
+                jsName: 'jobSiteVisits',
+                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/passive_job_site_visits", desc: "List passive visits" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/job_site_visits",
+                    "GET /v2/organizations/{organization_id}/passive_job_site_visits"
+                ]
+            },
+            locations: {
+                jsName: 'locations',
+                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/locations", desc: "List project locations" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/locations",
+                    "GET /v2/projects/{project_id}/locations"
+                ]
+            },
+            webhooks: {
+                jsName: 'webhooks',
+                lastEndpoint: '{ method: "POST", path: "/v2/webhooks/{webhook_id}/activate", desc: "Activate webhook" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/webhooks",
+                    "POST /v2/organizations/{organization_id}/webhooks",
+                    "GET /v2/projects/{project_id}/webhooks",
+                    "GET /v2/users/me/webhooks",
+                    "GET /v2/webhooks/{webhook_id}",
+                    "DELETE /v2/webhooks/{webhook_id}",
+                    "POST /v2/webhooks/{webhook_id}/activate"
+                ]
+            },
+            clients: {
+                jsName: 'clients',
+                lastEndpoint: '{ method: "PUT", path: "/v2/clients/{client_id}/update_metadata", desc: "Update client metadata" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/clients",
+                    "POST /v2/organizations/{organization_id}/clients",
+                    "GET /v2/clients/{client_id}",
+                    "PUT /v2/clients/{client_id}",
+                    "PUT /v2/clients/{client_id}/update_metadata"
+                ]
+            },
+            invites: {
+                jsName: 'invites',
+                lastEndpoint: '{ method: "DELETE", path: "/v2/invites/{invite_id}", desc: "Delete invite" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/invites",
+                    "POST /v2/organizations/{organization_id}/invites",
+                    "POST /v2/organizations/{organization_id}/invites/bulk",
+                    "GET /v2/invites/{invite_id}",
+                    "PUT /v2/invites/{invite_id}",
+                    "DELETE /v2/invites/{invite_id}"
+                ]
+            },
+            notes: {
+                jsName: 'notes',
+                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/notes", desc: "List project notes" }',
+                endpoints: [
+                    "GET /v2/notes/{note_id}",
+                    "GET /v2/organizations/{organization_id}/notes",
+                    "GET /v2/projects/{project_id}/notes"
+                ]
+            },
+            rates: {
+                jsName: 'rates',
+                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/rates", desc: "List rates" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/rates"
+                ]
+            },
+            client_invoices: {
+                jsName: 'invoices',
+                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/client_invoices", desc: "List client invoices" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/client_invoices"
+                ]
+            },
+            team_invoices: {
+                jsName: 'invoices',
+                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/team_invoices", desc: "List team invoices" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/team_invoices"
+                ]
+            },
+            team_payments: {
+                jsName: 'payments',
+                lastEndpoint: '{ method: "GET", path: "/v2/team_payments/{team_payment_id}", desc: "Get payment details" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/team_payments",
+                    "GET /v2/team_payments/{team_payment_id}"
+                ]
+            },
+            tool_usages: {
+                jsName: 'toolUsages',
+                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/tool_usages/daily", desc: "Project daily tool usage" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/tool_usages",
+                    "GET /v2/organizations/{organization_id}/tool_usages/daily",
+                    "GET /v2/projects/{project_id}/tool_usages",
+                    "GET /v2/projects/{project_id}/tool_usages/daily"
+                ]
+            },
+            time_off_policies: {
+                jsName: 'timeOff',
+                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/time_off_policies", desc: "List time off policies" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/time_off_policies"
+                ]
+            },
+            time_off_requests: {
+                jsName: 'timeOff',
+                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/time_off_requests", desc: "List time off requests" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/time_off_requests"
+                ]
+            },
+            holidays: {
+                jsName: 'holidays',
+                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/holidays", desc: "List holidays" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/holidays"
+                ]
+            },
+            budgets: {
+                jsName: 'budgets',
+                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/budget_histories", desc: "Project budget histories" }',
+                endpoints: [
+                    "GET /v2/budget_histories/{budget_history_id}",
+                    "GET /v2/clients/{client_id}/budget_histories",
+                    "GET /v2/organizations/{organization_id}/budget_histories",
+                    "GET /v2/projects/{project_id}/budget_histories"
+                ]
+            },
+            limits: {
+                jsName: 'limits',
+                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/limit_histories", desc: "List limit histories" }',
+                endpoints: [
+                    "GET /v2/limit_histories/{limit_history_id}",
+                    "GET /v2/organizations/{organization_id}/limit_histories"
+                ]
+            },
+            integrations: {
+                jsName: 'integrations',
+                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/integration_links", desc: "Project integration links" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/integrations",
+                    "GET /v2/integrations/{integration_id}/project_links",
+                    "GET /v2/integrations/{integration_id}/user_links",
+                    "GET /v2/projects/{project_id}/integration_links"
+                ]
+            },
+            time_edit_logs: {
+                jsName: 'timeEditLogs',
+                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/time_edit_logs", desc: "Project time edit logs" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/time_edit_logs",
+                    "GET /v2/projects/{project_id}/time_edit_logs"
+                ]
+            },
+            smart_notification_rules: {
+                jsName: 'insights',
+                lastEndpoint: '{ method: "POST", path: "/v2/insights/smart_notification_rules/{rule_id}/toggle_status", desc: "Toggle rule status" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/insights/smart_notification_rules",
+                    "POST /v2/organizations/{organization_id}/insights/smart_notification_rules",
+                    "GET /v2/insights/smart_notification_rules/{rule_id}",
+                    "PUT /v2/insights/smart_notification_rules/{rule_id}",
+                    "DELETE /v2/insights/smart_notification_rules/{rule_id}",
+                    "POST /v2/insights/smart_notification_rules/{rule_id}/toggle_status"
+                ]
+            },
+            smart_notifications: {
+                jsName: 'insights',
+                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/insights/smart_notifications", desc: "List notifications" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/insights/smart_notifications"
+                ]
+            },
+            unusual_activities: {
+                jsName: 'insights',
+                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/insights/unusual_activities", desc: "Unusual activities" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/insights/unusual_activities"
+                ]
+            },
+            global_todos: {
+                jsName: 'globalTodos',
+                lastEndpoint: '{ method: "PUT", path: "/v2/organizations/{organization_id}/global_todos/{id}", desc: "Update global to-do" }',
+                endpoints: [
+                    "GET /v2/organizations/{organization_id}/global_todos",
+                    "POST /v2/organizations/{organization_id}/global_todos",
+                    "GET /v2/organizations/{organization_id}/global_todos/{id}",
+                    "PUT /v2/organizations/{organization_id}/global_todos/{id}"
+                ]
+            },
+            errors: {
+                jsName: 'errorCodes',
+                lastEndpoint: '{ method: "GET", path: "/v2/error_codes", desc: "List all error codes" }',
+                endpoints: [
+                    "GET /v2/error_codes"
+                ]
+            }
         };
 
         // Category icons
         const categoryIcons = {
-            activities: "⏱️",
-            attendance_schedules: "📅",
-            attendance_shifts: "📋",
-            budgets: "📈",
-            client_invoices: "🧾",
-            clients: "🤝",
-            global_todos: "📌",
-            holidays: "🎄",
-            integrations: "🔗",
-            invites: "✉️",
-            job_site_visits: "🚶",
-            job_sites: "📍",
-            limits: "⏰",
-            locations: "🗺️",
-            members: "👥",
-            notes: "📝",
-            organizations: "🏛️",
-            projects: "📁",
-            rates: "💰",
-            screenshots: "📸",
-            smart_notification_rules: "🔮",
-            smart_notifications: "🔔",
-            tasks: "✅",
-            team_invoices: "🧾",
-            team_payments: "💳",
-            teams: "🏢",
-            time_edit_logs: "📜",
-            time_entries: "🕐",
-            time_off_policies: "🏖️",
-            time_off_requests: "🏖️",
-            timesheets: "📊",
-            tool_usages: "🖥️",
-            unusual_activities: "⚠️",
-            users: "👤",
-            webhooks: "🔔",
-            errors: "❌"
+            activities: "⏱️", attendance_schedules: "📅", attendance_shifts: "📋",
+            budgets: "📈", client_invoices: "🧾", clients: "🤝", global_todos: "📌",
+            holidays: "🎄", integrations: "🔗", invites: "✉️", job_site_visits: "🚶",
+            job_sites: "📍", limits: "⏰", locations: "🗺️", members: "👥", notes: "📝",
+            organizations: "🏛️", projects: "📁", rates: "💰", screenshots: "📸",
+            smart_notification_rules: "🔮", smart_notifications: "🔔", tasks: "✅",
+            team_invoices: "🧾", team_payments: "💳", teams: "🏢", time_edit_logs: "📜",
+            time_entries: "🕐", time_off_policies: "🏖️", time_off_requests: "🏖️",
+            timesheets: "📊", tool_usages: "🖥️", unusual_activities: "⚠️",
+            users: "👤", webhooks: "🔔", errors: "❌"
         };
 
         let apiData = null;
@@ -946,18 +1054,15 @@
         }
 
         function analyzeAndCompare() {
-            // Parse endpoints from API docs
             const liveEndpoints = {};
             const tagDescriptions = {};
 
-            // Get tag descriptions
             if (apiData.tags) {
                 apiData.tags.forEach(tag => {
                     tagDescriptions[tag.name] = tag.description;
                 });
             }
 
-            // Parse all paths
             if (apiData.paths) {
                 Object.entries(apiData.paths).forEach(([path, methods]) => {
                     Object.entries(methods).forEach(([method, details]) => {
@@ -969,91 +1074,84 @@
                             liveEndpoints[tag].push({
                                 method: method.toUpperCase(),
                                 path: path,
-                                description: details.summary || details.description || ''
+                                description: details.summary || details.description || '',
+                                key: `${method.toUpperCase()} ${path}`
                             });
                         }
                     });
                 });
             }
 
-            // Compare and find differences
-            const changes = {
-                newEndpoints: [],      // In live API, not in your tool
-                newCategories: [],     // Entire new categories
-                totalLive: 0,
-                totalCurrent: 0
-            };
+            // Find new endpoints
+            const changes = [];
+            let totalLive = 0;
+            let totalCurrent = 0;
 
-            // Count current endpoints
-            Object.values(currentToolEndpoints).forEach(endpoints => {
-                changes.totalCurrent += endpoints.length;
+            // Count current
+            Object.values(currentToolData).forEach(cat => {
+                totalCurrent += cat.endpoints.length;
             });
 
-            // Check each category in live API
+            // Check each live endpoint
             Object.entries(liveEndpoints).forEach(([category, endpoints]) => {
-                changes.totalLive += endpoints.length;
-
-                const currentCategoryEndpoints = currentToolEndpoints[category] || [];
-                const currentStrings = currentCategoryEndpoints.map(e => `${e.method} ${e.path}`);
-
-                // Check if this is an entirely new category
-                if (!currentToolEndpoints[category]) {
-                    changes.newCategories.push({
-                        category,
-                        description: tagDescriptions[category] || '',
-                        endpoints
+                totalLive += endpoints.length;
+                
+                const currentCat = currentToolData[category];
+                if (!currentCat) {
+                    // Entire new category
+                    endpoints.forEach(ep => {
+                        changes.push({
+                            type: 'new_category',
+                            category,
+                            endpoint: ep,
+                            description: tagDescriptions[category]
+                        });
                     });
                 } else {
-                    // Find new endpoints in existing category
+                    // Check for new endpoints in existing category
                     endpoints.forEach(ep => {
-                        const epString = `${ep.method} ${ep.path}`;
-                        if (!currentStrings.includes(epString)) {
-                            changes.newEndpoints.push({
+                        if (!currentCat.endpoints.includes(ep.key)) {
+                            changes.push({
+                                type: 'new_endpoint',
                                 category,
-                                ...ep
+                                jsName: currentCat.jsName,
+                                lastEndpoint: currentCat.lastEndpoint,
+                                endpoint: ep
                             });
                         }
                     });
                 }
             });
 
-            displayResults(changes, tagDescriptions);
+            displayResults(changes, totalLive, totalCurrent, tagDescriptions);
         }
 
-        function displayResults(changes, tagDescriptions) {
+        function displayResults(changes, totalLive, totalCurrent, tagDescriptions) {
             document.getElementById('resultsSection').classList.add('show');
-
-            const totalNew = changes.newEndpoints.length + 
-                changes.newCategories.reduce((sum, cat) => sum + cat.endpoints.length, 0);
 
             // Stats
             document.getElementById('statsGrid').innerHTML = `
                 <div class="stat-card stat-total">
-                    <div class="stat-value">${changes.totalLive}</div>
+                    <div class="stat-value">${totalLive}</div>
                     <div class="stat-label">Live API Endpoints</div>
                 </div>
                 <div class="stat-card stat-ok">
-                    <div class="stat-value">${changes.totalCurrent}</div>
+                    <div class="stat-value">${totalCurrent}</div>
                     <div class="stat-label">In Your Tool</div>
                 </div>
                 <div class="stat-card stat-new">
-                    <div class="stat-value">${totalNew}</div>
-                    <div class="stat-label">New to Add</div>
-                </div>
-                <div class="stat-card stat-new">
-                    <div class="stat-value">${changes.newCategories.length}</div>
-                    <div class="stat-label">New Categories</div>
+                    <div class="stat-value">${changes.length}</div>
+                    <div class="stat-label">Changes Needed</div>
                 </div>
             `;
 
-            // Summary box
-            if (totalNew === 0) {
+            if (changes.length === 0) {
                 document.getElementById('summaryBox').innerHTML = `
                     <div class="info-box success">
                         <span class="info-icon">🎉</span>
                         <div class="info-content">
                             <strong>Your tool is up to date!</strong><br>
-                            All ${changes.totalLive} endpoints in the live API are already in your Hubstaff API Assistant.
+                            All ${totalLive} endpoints in the live API are already in your Hubstaff API Assistant.
                         </div>
                     </div>
                 `;
@@ -1071,190 +1169,149 @@
                 <div class="info-box warning">
                     <span class="info-icon">⚠️</span>
                     <div class="info-content">
-                        <strong>${totalNew} new endpoint${totalNew !== 1 ? 's' : ''} found!</strong><br>
-                        Follow the step-by-step instructions below to update your Hubstaff API Assistant.
+                        <strong>${changes.length} change${changes.length !== 1 ? 's' : ''} needed!</strong><br>
+                        Follow each step below. Use <span class="keyboard-shortcut"><kbd>⌘</kbd> + <kbd>F</kbd></span> (Mac) or <span class="keyboard-shortcut"><kbd>Ctrl</kbd> + <kbd>F</kbd></span> (Windows) to find code in your file.
                     </div>
                 </div>
             `;
 
-            // Generate instructions
-            let instructionsHtml = '';
-            let stepNumber = 1;
-
-            // New categories first
-            if (changes.newCategories.length > 0) {
-                instructionsHtml += `<div class="section-divider">🆕 New Categories to Add</div>`;
-
-                changes.newCategories.forEach(cat => {
-                    const icon = categoryIcons[cat.category] || '📦';
-                    const toolCategoryName = categoryMapping[cat.category] || toCamelCase(cat.category);
-                    const title = cat.category.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-
-                    instructionsHtml += `
-                        <div class="instruction-card">
-                            <div class="instruction-header" onclick="toggleInstruction(this)">
-                                <div class="instruction-number new">${stepNumber}</div>
-                                <div class="instruction-title">
-                                    <h3>${icon} Add New Category: ${title}</h3>
-                                    <p>${cat.endpoints.length} endpoint${cat.endpoints.length !== 1 ? 's' : ''}</p>
-                                </div>
-                                <span class="instruction-badge new">NEW CATEGORY</span>
-                                <span class="instruction-toggle">▼</span>
-                            </div>
-                            <div class="instruction-body">
-                                <div class="instruction-step">
-                                    <div class="step-label">
-                                        <span class="emoji">🔍</span> Step A: Find the apiKnowledge object
-                                    </div>
-                                    <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
-                                        In your <strong>index.html</strong>, search for <code>const apiKnowledge = {</code> (around line 500)
-                                    </p>
-                                </div>
-
-                                <div class="instruction-step">
-                                    <div class="step-label">
-                                        <span class="emoji">📍</span> Step B: Find where to add it
-                                    </div>
-                                    <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
-                                        Scroll to the end of the apiKnowledge object (before the closing <code>};</code>) and add a comma after the last category.
-                                    </p>
-                                </div>
-
-                                <div class="instruction-step">
-                                    <div class="step-label">
-                                        <span class="emoji">📋</span> Step C: Copy and paste this code
-                                    </div>
-                                    <div class="code-block">
-                                        <button class="btn btn-secondary copy-btn-inline" onclick="copyCode(this)">📋 Copy</button>
-                                        <pre>${generateCategoryCode(cat, icon, title)}</pre>
-                                    </div>
+            // Generate step-by-step instructions
+            let html = '';
+            
+            changes.forEach((change, index) => {
+                const icon = categoryIcons[change.category] || '📦';
+                const methodClass = `method-${change.endpoint.method.toLowerCase()}`;
+                
+                if (change.type === 'new_category') {
+                    // New category - more complex
+                    html += generateNewCategoryCard(change, index + 1, icon, tagDescriptions);
+                } else {
+                    // New endpoint in existing category
+                    html += `
+                        <div class="change-card">
+                            <div class="change-header">
+                                <div class="change-number">${index + 1}</div>
+                                <div class="change-title">
+                                    <h3>
+                                        <span class="method-badge ${methodClass}">${change.endpoint.method}</span>
+                                        Add new endpoint
+                                    </h3>
+                                    <p>${icon} ${change.category} → ${change.jsName}</p>
                                 </div>
                             </div>
-                        </div>
-                    `;
-                    stepNumber++;
-                });
-            }
+                            <div class="change-body">
+                                <p class="helper-text">
+                                    <strong>1. Open your index.html</strong> and press <span class="keyboard-shortcut"><kbd>⌘</kbd> + <kbd>F</kbd></span> to open Find.
+                                </p>
 
-            // New endpoints in existing categories
-            if (changes.newEndpoints.length > 0) {
-                // Group by category
-                const byCategory = {};
-                changes.newEndpoints.forEach(ep => {
-                    if (!byCategory[ep.category]) {
-                        byCategory[ep.category] = [];
-                    }
-                    byCategory[ep.category].push(ep);
-                });
-
-                instructionsHtml += `<div class="section-divider">➕ New Endpoints to Add</div>`;
-
-                Object.entries(byCategory).forEach(([category, endpoints]) => {
-                    const icon = categoryIcons[category] || '📦';
-                    const toolCategoryName = categoryMapping[category] || toCamelCase(category);
-                    const title = category.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-
-                    instructionsHtml += `
-                        <div class="instruction-card">
-                            <div class="instruction-header" onclick="toggleInstruction(this)">
-                                <div class="instruction-number">${stepNumber}</div>
-                                <div class="instruction-title">
-                                    <h3>Add ${endpoints.length} endpoint${endpoints.length !== 1 ? 's' : ''} to ${title}</h3>
-                                    <p>${icon} ${toolCategoryName} category</p>
-                                </div>
-                                <span class="instruction-badge category">${category}</span>
-                                <span class="instruction-toggle">▼</span>
-                            </div>
-                            <div class="instruction-body">
-                                <div class="instruction-step">
-                                    <div class="step-label">
-                                        <span class="emoji">🔍</span> Step A: Find this category in your code
+                                <div class="find-replace-section">
+                                    <div class="section-label find">
+                                        <span class="emoji">🔍</span> FIND this exact line:
                                     </div>
-                                    <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
-                                        Search for <code>${toolCategoryName}: {</code> in your index.html
-                                    </p>
+                                    <div class="code-block find-block">
+                                        <button class="copy-btn-corner" onclick="copyText(this, '${escapeForCopy(change.lastEndpoint)}')">📋 Copy</button>
+                                        <pre><span class="line highlight">${escapeHtml(change.lastEndpoint)}</span></pre>
+                                    </div>
                                 </div>
 
-                                <div class="instruction-step">
-                                    <div class="step-label">
-                                        <span class="emoji">📍</span> Step B: Find the endpoints array
+                                <div class="arrow-down">⬇️</div>
+
+                                <div class="find-replace-section">
+                                    <div class="section-label replace">
+                                        <span class="emoji">✏️</span> REPLACE with these lines:
                                     </div>
-                                    <p style="color: var(--text-secondary); margin-bottom: 0.75rem;">
-                                        Inside that category, find the <code>endpoints: [</code> array
-                                    </p>
+                                    <div class="code-block replace-block">
+                                        <button class="copy-btn-corner" onclick="copyText(this, '${escapeForCopy(change.lastEndpoint + ',\n                    { method: "' + change.endpoint.method + '", path: "' + change.endpoint.path + '", desc: "' + change.endpoint.description.replace(/"/g, '\\"') + '" }')}')">📋 Copy</button>
+                                        <pre><span class="line unchanged">${escapeHtml(change.lastEndpoint)},</span>
+<span class="line new">                    { method: "${change.endpoint.method}", path: "${change.endpoint.path}", desc: "${escapeHtml(change.endpoint.description)}" }</span></pre>
+                                    </div>
                                 </div>
 
-                                <div class="instruction-step">
-                                    <div class="step-label">
-                                        <span class="emoji">📋</span> Step C: Add these lines to the endpoints array
-                                    </div>
-                                    ${endpoints.map(ep => `
-                                        <div class="endpoint-preview">
-                                            <span class="method-badge method-${ep.method.toLowerCase()}">${ep.method}</span>
-                                            <span>${ep.path}</span>
-                                        </div>
-                                    `).join('')}
-                                    <div class="code-block" style="margin-top: 1rem;">
-                                        <button class="btn btn-secondary copy-btn-inline" onclick="copyCode(this)">📋 Copy</button>
-                                        <pre>${endpoints.map(ep => 
-                                            `<span class="new-line">{ method: "${ep.method}", path: "${ep.path}", desc: "${ep.description.replace(/"/g, '\\"')}" },</span>`
-                                        ).join('\n')}</pre>
-                                    </div>
+                                <div class="tip-box">
+                                    <strong>💡 Tip:</strong> You're adding a comma after the existing line, then adding the new endpoint on the next line.
                                 </div>
                             </div>
                         </div>
                     `;
-                    stepNumber++;
-                });
-            }
+                }
+            });
 
-            document.getElementById('instructionsContainer').innerHTML = instructionsHtml;
+            document.getElementById('instructionsContainer').innerHTML = html;
         }
 
-        function generateCategoryCode(cat, icon, title) {
-            const toolCategoryName = categoryMapping[cat.category] || toCamelCase(cat.category);
-            let code = `<span class="new-line">${toolCategoryName}: {</span>\n`;
-            code += `<span class="new-line">    title: "${title}",</span>\n`;
-            code += `<span class="new-line">    icon: "${icon}",</span>\n`;
-            code += `<span class="new-line">    description: "${cat.description.replace(/"/g, '\\"')}",</span>\n`;
-            code += `<span class="new-line">    endpoints: [</span>\n`;
-            cat.endpoints.forEach((ep, i) => {
-                code += `<span class="new-line">        { method: "${ep.method}", path: "${ep.path}", desc: "${ep.description.replace(/"/g, '\\"')}" }${i < cat.endpoints.length - 1 ? ',' : ''}</span>\n`;
-            });
-            code += `<span class="new-line">    ],</span>\n`;
-            code += `<span class="new-line">    status: "supported"</span>\n`;
-            code += `<span class="new-line">},</span>`;
-            return code;
+        function generateNewCategoryCard(change, stepNum, icon, tagDescriptions) {
+            const title = change.category.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            const jsName = toCamelCase(change.category);
+            const desc = tagDescriptions[change.category] || '';
+            
+            return `
+                <div class="change-card">
+                    <div class="change-header" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);">
+                        <div class="change-number" style="background: var(--accent-purple);">${stepNum}</div>
+                        <div class="change-title">
+                            <h3>🆕 Add entirely new category: ${title}</h3>
+                            <p>This is a new API category not in your tool yet</p>
+                        </div>
+                    </div>
+                    <div class="change-body">
+                        <p class="helper-text">
+                            <strong>1. Open your index.html</strong> and press <span class="keyboard-shortcut"><kbd>⌘</kbd> + <kbd>F</kbd></span> to find <code>status: "info"</code> (this appears near the end of apiKnowledge).
+                        </p>
+                        <p class="helper-text">
+                            <strong>2. After the closing <code>}</code> of the last category</strong>, add a comma, then paste this new category:
+                        </p>
+                        
+                        <div class="code-block replace-block">
+                            <button class="copy-btn-corner" onclick="copyNewCategory(this, '${jsName}', '${title}', '${icon}', '${escapeForCopy(desc)}', '${change.endpoint.method}', '${change.endpoint.path}', '${escapeForCopy(change.endpoint.description)}')">📋 Copy</button>
+                            <pre><span class="line new">${jsName}: {</span>
+<span class="line new">    title: "${title}",</span>
+<span class="line new">    icon: "${icon}",</span>
+<span class="line new">    description: "${escapeHtml(desc)}",</span>
+<span class="line new">    endpoints: [</span>
+<span class="line new">        { method: "${change.endpoint.method}", path: "${change.endpoint.path}", desc: "${escapeHtml(change.endpoint.description)}" }</span>
+<span class="line new">    ],</span>
+<span class="line new">    status: "supported"</span>
+<span class="line new">},</span></pre>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
         function toCamelCase(str) {
             return str.replace(/_([a-z])/g, (g) => g[1].toUpperCase());
         }
 
-        function toggleInstruction(element) {
-            const body = element.nextElementSibling;
-            const toggle = element.querySelector('.instruction-toggle');
-            body.classList.toggle('open');
-            toggle.textContent = body.classList.contains('open') ? '▲' : '▼';
+        function escapeHtml(str) {
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
         }
 
-        function copyCode(button) {
-            const codeBlock = button.parentElement;
-            const pre = codeBlock.querySelector('pre');
-            // Strip HTML tags to get plain text
-            const text = pre.innerHTML
-                .replace(/<span class="new-line">/g, '')
-                .replace(/<\/span>/g, '')
-                .replace(/<span class="[^"]*">/g, '')
-                .replace(/&lt;/g, '<')
-                .replace(/&gt;/g, '>')
-                .replace(/&amp;/g, '&');
-            
-            navigator.clipboard.writeText(text).then(() => {
-                button.innerHTML = '✅ Copied!';
-                setTimeout(() => {
-                    button.innerHTML = '📋 Copy';
-                }, 2000);
+        function escapeForCopy(str) {
+            return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, '\\n');
+        }
+
+        function copyText(button, text) {
+            // Unescape the text
+            const unescaped = text.replace(/\\n/g, '\n').replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+            navigator.clipboard.writeText(unescaped).then(() => {
+                button.textContent = '✅ Copied!';
+                setTimeout(() => button.textContent = '📋 Copy', 2000);
+            });
+        }
+
+        function copyNewCategory(button, jsName, title, icon, desc, method, path, epDesc) {
+            const code = `${jsName}: {
+    title: "${title}",
+    icon: "${icon}",
+    description: "${desc.replace(/\\"/g, '"')}",
+    endpoints: [
+        { method: "${method}", path: "${path}", desc: "${epDesc.replace(/\\"/g, '"')}" }
+    ],
+    status: "supported"
+},`;
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = '✅ Copied!';
+                setTimeout(() => button.textContent = '📋 Copy', 2000);
             });
         }
     </script>
