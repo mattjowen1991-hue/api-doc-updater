@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hubstaff API Docs Updater v3</title>
+    <title>Hubstaff API Docs Updater - Smart</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -37,7 +37,7 @@
                 radial-gradient(ellipse at bottom right, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
         }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .container { max-width: 950px; margin: 0 auto; padding: 2rem; }
 
         header { text-align: center; margin-bottom: 2rem; padding: 2rem 0; }
 
@@ -52,7 +52,7 @@
         .logo-icon {
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-teal) 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -63,13 +63,24 @@
         h1 {
             font-size: 2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-purple) 100%);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-green) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .subtitle { color: var(--text-secondary); margin-top: 0.5rem; font-size: 1rem; }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-teal));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
 
         .card {
             background: var(--bg-card);
@@ -97,13 +108,27 @@
             font-weight: 600;
         }
 
+        .step-badge.green { background: var(--accent-green); }
+        .step-badge.blue { background: var(--accent-blue); }
+
+        .drop-zones {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 700px) {
+            .drop-zones { grid-template-columns: 1fr; }
+        }
+
         .drop-zone {
             border: 2px dashed var(--border);
             border-radius: 12px;
-            padding: 3rem;
+            padding: 2rem 1.5rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s;
+            position: relative;
         }
 
         .drop-zone:hover, .drop-zone.drag-over {
@@ -116,9 +141,17 @@
             background: rgba(34, 197, 94, 0.1);
         }
 
-        .drop-icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.5; }
-        .drop-text { color: var(--text-secondary); margin-bottom: 0.5rem; }
-        .drop-hint { font-size: 0.85rem; color: var(--text-muted); }
+        .drop-zone.has-file .drop-icon { opacity: 1; }
+
+        .drop-icon { font-size: 2.5rem; margin-bottom: 0.75rem; opacity: 0.5; }
+        .drop-text { color: var(--text-secondary); margin-bottom: 0.25rem; font-weight: 500; }
+        .drop-hint { font-size: 0.8rem; color: var(--text-muted); }
+        .drop-filename {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent-green);
+            font-family: 'JetBrains Mono', monospace;
+        }
         .file-input { display: none; }
 
         .info-box {
@@ -170,12 +203,46 @@
             color: var(--text-secondary);
         }
 
+        .btn {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: inherit;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(57, 181, 74, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .compare-btn-wrapper {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
         .results-section { display: none; }
         .results-section.show { display: block; }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 1rem;
             margin-bottom: 1.5rem;
         }
@@ -192,7 +259,8 @@
         .stat-label { font-size: 0.8rem; color: var(--text-muted); }
         .stat-new .stat-value { color: var(--accent-green); }
         .stat-total .stat-value { color: var(--accent-blue); }
-        .stat-ok .stat-value { color: var(--accent-teal); }
+        .stat-current .stat-value { color: var(--accent-teal); }
+        .stat-categories .stat-value { color: var(--accent-purple); }
 
         .change-card {
             background: var(--bg-card);
@@ -401,12 +469,87 @@
 
         .find-replace-section { margin-bottom: 1rem; }
 
-        @media (max-width: 768px) {
-            .container { padding: 1rem; }
-            h1 { font-size: 1.5rem; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .code-block { font-size: 0.7rem; }
+        .paste-section {
+            margin-top: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
         }
+
+        .paste-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background: var(--bg-dark);
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+
+        .paste-header:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+        }
+
+        .paste-content {
+            display: none;
+            padding: 1rem;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+        }
+
+        .paste-content.open {
+            display: block;
+        }
+
+        .paste-content textarea {
+            width: 100%;
+            height: 150px;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            resize: vertical;
+            margin-bottom: 0.75rem;
+        }
+
+        .paste-content textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .paste-content textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .parsed-info {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .parsed-info strong { color: var(--text-secondary); }
     </style>
 </head>
 <body>
@@ -416,22 +559,17 @@
                 <div class="logo-icon">🔄</div>
                 <h1>API Docs Updater</h1>
             </div>
-            <p class="subtitle">Exact find-and-replace instructions to update your tool</p>
+            <p class="subtitle">Auto-compares live API docs with your actual tool</p>
+            <span class="badge">✨ Smart Version - No Manual Sync Needed</span>
         </header>
 
+        <!-- Step 1: Get API Docs -->
         <div class="card">
             <div class="card-title">
                 <span class="step-badge">Step 1</span>
-                <span>Load Latest API Documentation</span>
+                <span>Download Latest API Documentation</span>
             </div>
             
-            <div class="info-box">
-                <span class="info-icon">💡</span>
-                <div class="info-content">
-                    <strong>First, get the latest docs:</strong> Run this in Terminal, then drag the file here.
-                </div>
-            </div>
-
             <div class="terminal-box">
                 <div class="terminal-header">
                     <div class="terminal-dot red"></div>
@@ -442,19 +580,63 @@
                     $ <code>curl 'https://api.hubstaff.com/v2/docs' -o ~/Desktop/hubstaff-api-docs.json</code>
                 </div>
             </div>
-
-            <div class="drop-zone" id="dropZone">
-                <div class="drop-icon">📄</div>
-                <div class="drop-text">Drop hubstaff-api-docs.json here</div>
-                <div class="drop-hint">or click to browse</div>
-                <input type="file" class="file-input" id="fileInput" accept=".json">
-            </div>
         </div>
 
+        <!-- Step 2: Drop Both Files -->
+        <div class="card">
+            <div class="card-title">
+                <span class="step-badge green">Step 2</span>
+                <span>Drop Both Files</span>
+            </div>
+
+            <div class="drop-zones">
+                <div class="drop-zone" id="dropZoneApi">
+                    <div class="drop-icon">📄</div>
+                    <div class="drop-text">hubstaff-api-docs.json</div>
+                    <div class="drop-hint">Live API documentation</div>
+                    <div class="drop-filename" id="apiFileName"></div>
+                    <input type="file" class="file-input" id="fileInputApi" accept=".json">
+                </div>
+
+                <div class="drop-zone" id="dropZoneTool">
+                    <div class="drop-icon">🔌</div>
+                    <div class="drop-text">index.html</div>
+                    <div class="drop-hint">Drop file OR paste below</div>
+                    <div class="drop-filename" id="toolFileName"></div>
+                    <input type="file" class="file-input" id="fileInputTool" accept=".html">
+                </div>
+            </div>
+
+            <!-- Paste option for tool HTML -->
+            <div class="paste-section">
+                <div class="paste-header" onclick="togglePasteArea()">
+                    <span>📋 Or paste your index.html code directly</span>
+                    <span id="pasteToggle">▼</span>
+                </div>
+                <div class="paste-content" id="pasteContent">
+                    <textarea id="pasteArea" placeholder="Paste your raw HTML code here (from GitHub raw view)..."></textarea>
+                    <button class="btn btn-secondary" onclick="parseFromPaste()">
+                        <span>✨</span>
+                        <span>Parse Pasted Code</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="compare-btn-wrapper">
+                <button class="btn btn-primary" id="compareBtn" disabled onclick="runComparison()">
+                    <span>🔍</span>
+                    <span>Compare & Find Changes</span>
+                </button>
+            </div>
+
+            <div id="parseStatus"></div>
+        </div>
+
+        <!-- Results Section -->
         <div class="results-section" id="resultsSection">
             <div class="card">
                 <div class="card-title">
-                    <span class="step-badge">Results</span>
+                    <span class="step-badge blue">Results</span>
                     <span>Comparison Complete</span>
                 </div>
                 <div class="stats-grid" id="statsGrid"></div>
@@ -465,384 +647,231 @@
     </div>
 
     <script>
-        // Your current tool's endpoints - update this when you add new ones
-        const currentToolData = {
-            activities: {
-                jsName: 'activities',
-                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/last_activities", desc: "Get project last activities" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/activities",
-                    "GET /v2/organizations/{organization_id}/activities/updates",
-                    "GET /v2/organizations/{organization_id}/activities/daily",
-                    "GET /v2/organizations/{organization_id}/activities/daily/updates",
-                    "GET /v2/organizations/{organization_id}/last_activities",
-                    "GET /v2/projects/{project_id}/activities",
-                    "GET /v2/projects/{project_id}/activities/updates",
-                    "GET /v2/projects/{project_id}/activities/daily",
-                    "GET /v2/projects/{project_id}/last_activities"
-                ]
-            },
-            timesheets: {
-                jsName: 'timesheets',
-                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/timesheets", desc: "List organization timesheets" }',
-                endpoints: ["GET /v2/organizations/{organization_id}/timesheets"]
-            },
-            time_entries: {
-                jsName: 'timeEntries',
-                lastEndpoint: '{ method: "GET", path: "/v2/users/{user_id}/time_entries", desc: "List user time entries" }',
-                endpoints: ["GET /v2/users/{user_id}/time_entries"]
-            },
-            attendance_schedules: {
-                jsName: 'attendance',
-                lastEndpoint: '{ method: "PUT", path: "/v2/attendance_schedules/{attendance_schedule_id}", desc: "Update attendance schedule" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/attendance_schedules",
-                    "POST /v2/organizations/{organization_id}/attendance_schedules",
-                    "PUT /v2/attendance_schedules/{attendance_schedule_id}"
-                ]
-            },
-            attendance_shifts: {
-                jsName: 'attendance',
-                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/attendance_shifts", desc: "List attendance shifts" }',
-                endpoints: ["GET /v2/organizations/{organization_id}/attendance_shifts"]
-            },
-            projects: {
-                jsName: 'projects',
-                lastEndpoint: '{ method: "PUT", path: "/v2/projects/{project_id}/update_metadata", desc: "Update project metadata" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/projects",
-                    "POST /v2/organizations/{organization_id}/projects",
-                    "GET /v2/projects/{project_id}",
-                    "PUT /v2/projects/{project_id}",
-                    "PUT /v2/projects/{project_id}/update_metadata"
-                ]
-            },
-            tasks: {
-                jsName: 'tasks',
-                lastEndpoint: '{ method: "GET", path: "/v2/integrations/{integration_id}/tasks", desc: "List integration tasks" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/tasks",
-                    "GET /v2/projects/{project_id}/tasks",
-                    "POST /v2/projects/{project_id}/tasks",
-                    "GET /v2/tasks/{task_id}",
-                    "PUT /v2/tasks/{task_id}",
-                    "DELETE /v2/tasks/{task_id}",
-                    "PUT /v2/tasks/{task_id}/update_metadata",
-                    "GET /v2/integrations/{integration_id}/tasks"
-                ]
-            },
-            users: {
-                jsName: 'users',
-                lastEndpoint: '{ method: "GET", path: "/v2/users/{user_id}", desc: "Get user by ID" }',
-                endpoints: ["GET /v2/users/me", "GET /v2/users/{user_id}"]
-            },
-            members: {
-                jsName: 'members',
-                lastEndpoint: '{ method: "PUT", path: "/v2/teams/{team_id}/update_members", desc: "Update team members" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/members",
-                    "POST /v2/organizations/{organization_id}/members",
-                    "PUT /v2/organizations/{organization_id}/update_members",
-                    "GET /v2/projects/{project_id}/members",
-                    "PUT /v2/projects/{project_id}/update_members",
-                    "GET /v2/teams/{team_id}/members",
-                    "PUT /v2/teams/{team_id}/update_members"
-                ]
-            },
-            teams: {
-                jsName: 'teams',
-                lastEndpoint: '{ method: "PUT", path: "/v2/teams/{team_id}/update_metadata", desc: "Update team metadata" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/teams",
-                    "POST /v2/organizations/{organization_id}/teams",
-                    "GET /v2/teams/{team_id}",
-                    "PUT /v2/teams/{team_id}",
-                    "DELETE /v2/teams/{team_id}",
-                    "GET /v2/teams/{team_id}/projects",
-                    "PUT /v2/teams/{team_id}/update_projects",
-                    "PUT /v2/teams/{team_id}/update_metadata"
-                ]
-            },
-            organizations: {
-                jsName: 'organizations',
-                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/work_break_projects", desc: "Get work break projects" }',
-                endpoints: [
-                    "GET /v2/organizations",
-                    "POST /v2/organizations",
-                    "GET /v2/organizations/{organization_id}",
-                    "PUT /v2/organizations/{organization_id}/update_metadata",
-                    "GET /v2/organizations/{organization_id}/work_break_projects"
-                ]
-            },
-            screenshots: {
-                jsName: 'screenshots',
-                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/screenshots/{screenshot_id}", desc: "Get project screenshot" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/screenshots",
-                    "GET /v2/organizations/{organization_id}/screenshots/{screenshot_id}",
-                    "GET /v2/projects/{project_id}/screenshots",
-                    "GET /v2/projects/{project_id}/screenshots/{screenshot_id}"
-                ]
-            },
-            job_sites: {
-                jsName: 'jobSites',
-                lastEndpoint: '{ method: "PUT", path: "/v2/job_sites/{job_site_id}/remove_rules", desc: "Remove geofence rules" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/job_sites",
-                    "POST /v2/organizations/{organization_id}/job_sites",
-                    "GET /v2/job_sites/{job_site_id}",
-                    "PUT /v2/job_sites/{job_site_id}",
-                    "PUT /v2/job_sites/{job_site_id}/update_rules",
-                    "PUT /v2/job_sites/{job_site_id}/add_rules",
-                    "PUT /v2/job_sites/{job_site_id}/remove_rules"
-                ]
-            },
-            job_site_visits: {
-                jsName: 'jobSiteVisits',
-                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/passive_job_site_visits", desc: "List passive visits" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/job_site_visits",
-                    "GET /v2/organizations/{organization_id}/passive_job_site_visits"
-                ]
-            },
-            locations: {
-                jsName: 'locations',
-                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/locations", desc: "List project locations" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/locations",
-                    "GET /v2/projects/{project_id}/locations"
-                ]
-            },
-            webhooks: {
-                jsName: 'webhooks',
-                lastEndpoint: '{ method: "POST", path: "/v2/webhooks/{webhook_id}/activate", desc: "Activate webhook" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/webhooks",
-                    "POST /v2/organizations/{organization_id}/webhooks",
-                    "GET /v2/projects/{project_id}/webhooks",
-                    "GET /v2/users/me/webhooks",
-                    "GET /v2/webhooks/{webhook_id}",
-                    "DELETE /v2/webhooks/{webhook_id}",
-                    "POST /v2/webhooks/{webhook_id}/activate"
-                ]
-            },
-            clients: {
-                jsName: 'clients',
-                lastEndpoint: '{ method: "PUT", path: "/v2/clients/{client_id}/update_metadata", desc: "Update client metadata" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/clients",
-                    "POST /v2/organizations/{organization_id}/clients",
-                    "GET /v2/clients/{client_id}",
-                    "PUT /v2/clients/{client_id}",
-                    "PUT /v2/clients/{client_id}/update_metadata"
-                ]
-            },
-            invites: {
-                jsName: 'invites',
-                lastEndpoint: '{ method: "DELETE", path: "/v2/invites/{invite_id}", desc: "Delete invite" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/invites",
-                    "POST /v2/organizations/{organization_id}/invites",
-                    "POST /v2/organizations/{organization_id}/invites/bulk",
-                    "GET /v2/invites/{invite_id}",
-                    "PUT /v2/invites/{invite_id}",
-                    "DELETE /v2/invites/{invite_id}"
-                ]
-            },
-            notes: {
-                jsName: 'notes',
-                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/notes", desc: "List project notes" }',
-                endpoints: [
-                    "GET /v2/notes/{note_id}",
-                    "GET /v2/organizations/{organization_id}/notes",
-                    "GET /v2/projects/{project_id}/notes"
-                ]
-            },
-            rates: {
-                jsName: 'rates',
-                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/rates", desc: "List rates" }',
-                endpoints: ["GET /v2/organizations/{organization_id}/rates"]
-            },
-            client_invoices: {
-                jsName: 'invoices',
-                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/client_invoices", desc: "List client invoices" }',
-                endpoints: ["GET /v2/organizations/{organization_id}/client_invoices"]
-            },
-            team_invoices: {
-                jsName: 'invoices',
-                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/team_invoices", desc: "List team invoices" }',
-                endpoints: ["GET /v2/organizations/{organization_id}/team_invoices"]
-            },
-            team_payments: {
-                jsName: 'payments',
-                lastEndpoint: '{ method: "GET", path: "/v2/team_payments/{team_payment_id}", desc: "Get payment details" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/team_payments",
-                    "GET /v2/team_payments/{team_payment_id}"
-                ]
-            },
-            tool_usages: {
-                jsName: 'toolUsages',
-                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/tool_usages/daily", desc: "Project daily tool usage" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/tool_usages",
-                    "GET /v2/organizations/{organization_id}/tool_usages/daily",
-                    "GET /v2/projects/{project_id}/tool_usages",
-                    "GET /v2/projects/{project_id}/tool_usages/daily"
-                ]
-            },
-            time_off_policies: {
-                jsName: 'timeOff',
-                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/time_off_policies", desc: "List time off policies" }',
-                endpoints: ["GET /v2/organizations/{organization_id}/time_off_policies"]
-            },
-            time_off_requests: {
-                jsName: 'timeOff',
-                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/time_off_requests", desc: "List time off requests" }',
-                endpoints: ["GET /v2/organizations/{organization_id}/time_off_requests"]
-            },
-            holidays: {
-                jsName: 'holidays',
-                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/holidays", desc: "List holidays" }',
-                endpoints: ["GET /v2/organizations/{organization_id}/holidays"]
-            },
-            budgets: {
-                jsName: 'budgets',
-                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/budget_histories", desc: "Project budget histories" }',
-                endpoints: [
-                    "GET /v2/budget_histories/{budget_history_id}",
-                    "GET /v2/clients/{client_id}/budget_histories",
-                    "GET /v2/organizations/{organization_id}/budget_histories",
-                    "GET /v2/projects/{project_id}/budget_histories"
-                ]
-            },
-            limits: {
-                jsName: 'limits',
-                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/limit_histories", desc: "List limit histories" }',
-                endpoints: [
-                    "GET /v2/limit_histories/{limit_history_id}",
-                    "GET /v2/organizations/{organization_id}/limit_histories"
-                ]
-            },
-            integrations: {
-                jsName: 'integrations',
-                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/integration_links", desc: "Project integration links" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/integrations",
-                    "GET /v2/integrations/{integration_id}/project_links",
-                    "GET /v2/integrations/{integration_id}/user_links",
-                    "GET /v2/projects/{project_id}/integration_links"
-                ]
-            },
-            time_edit_logs: {
-                jsName: 'timeEditLogs',
-                lastEndpoint: '{ method: "GET", path: "/v2/projects/{project_id}/time_edit_logs", desc: "Project time edit logs" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/time_edit_logs",
-                    "GET /v2/projects/{project_id}/time_edit_logs"
-                ]
-            },
-            smart_notification_rules: {
-                jsName: 'insights',
-                lastEndpoint: '{ method: "POST", path: "/v2/insights/smart_notification_rules/{rule_id}/toggle_status", desc: "Toggle rule status" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/insights/smart_notification_rules",
-                    "POST /v2/organizations/{organization_id}/insights/smart_notification_rules",
-                    "GET /v2/insights/smart_notification_rules/{rule_id}",
-                    "PUT /v2/insights/smart_notification_rules/{rule_id}",
-                    "DELETE /v2/insights/smart_notification_rules/{rule_id}",
-                    "POST /v2/insights/smart_notification_rules/{rule_id}/toggle_status"
-                ]
-            },
-            smart_notifications: {
-                jsName: 'insights',
-                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/insights/smart_notifications", desc: "List notifications" }',
-                endpoints: ["GET /v2/organizations/{organization_id}/insights/smart_notifications"]
-            },
-            unusual_activities: {
-                jsName: 'insights',
-                lastEndpoint: '{ method: "GET", path: "/v2/organizations/{organization_id}/insights/unusual_activities", desc: "Unusual activities" }',
-                endpoints: ["GET /v2/organizations/{organization_id}/insights/unusual_activities"]
-            },
-            global_todos: {
-                jsName: 'globalTodos',
-                lastEndpoint: '{ method: "PUT", path: "/v2/organizations/{organization_id}/global_todos/{id}", desc: "Update global to-do" }',
-                endpoints: [
-                    "GET /v2/organizations/{organization_id}/global_todos",
-                    "POST /v2/organizations/{organization_id}/global_todos",
-                    "GET /v2/organizations/{organization_id}/global_todos/{id}",
-                    "PUT /v2/organizations/{organization_id}/global_todos/{id}"
-                ]
-            },
-            errors: {
-                jsName: 'errorCodes',
-                lastEndpoint: '{ method: "GET", path: "/v2/error_codes", desc: "List all error codes" }',
-                endpoints: ["GET /v2/error_codes"]
-            }
+        let apiData = null;
+        let toolEndpoints = null;
+        let toolLastEndpoints = {};
+        let copyData = {};
+
+        // Category name mapping (API tag -> JS property name in your tool)
+        const categoryMapping = {
+            'activities': 'activities',
+            'timesheets': 'timesheets',
+            'time_entries': 'timeEntries',
+            'attendance_schedules': 'attendance',
+            'attendance_shifts': 'attendance',
+            'projects': 'projects',
+            'tasks': 'tasks',
+            'users': 'users',
+            'members': 'members',
+            'teams': 'teams',
+            'organizations': 'organizations',
+            'screenshots': 'screenshots',
+            'job_sites': 'jobSites',
+            'job_site_visits': 'jobSiteVisits',
+            'locations': 'locations',
+            'webhooks': 'webhooks',
+            'clients': 'clients',
+            'invites': 'invites',
+            'notes': 'notes',
+            'rates': 'rates',
+            'client_invoices': 'invoices',
+            'team_invoices': 'invoices',
+            'team_payments': 'payments',
+            'tool_usages': 'toolUsages',
+            'time_off_policies': 'timeOff',
+            'time_off_requests': 'timeOff',
+            'holidays': 'holidays',
+            'budgets': 'budgets',
+            'limits': 'limits',
+            'integrations': 'integrations',
+            'time_edit_logs': 'timeEditLogs',
+            'smart_notification_rules': 'insights',
+            'smart_notifications': 'insights',
+            'unusual_activities': 'insights',
+            'global_todos': 'globalTodos',
+            'errors': 'errorCodes'
         };
 
         const categoryIcons = {
-            activities: "⏱️", attendance_schedules: "📅", attendance_shifts: "📋",
-            budgets: "📈", client_invoices: "🧾", clients: "🤝", global_todos: "📌",
-            holidays: "🎄", integrations: "🔗", invites: "✉️", job_site_visits: "🚶",
-            job_sites: "📍", limits: "⏰", locations: "🗺️", members: "👥", notes: "📝",
-            organizations: "🏛️", projects: "📁", rates: "💰", screenshots: "📸",
-            smart_notification_rules: "🔮", smart_notifications: "🔔", tasks: "✅",
-            team_invoices: "🧾", team_payments: "💳", teams: "🏢", time_edit_logs: "📜",
-            time_entries: "🕐", time_off_policies: "🏖️", time_off_requests: "🏖️",
-            timesheets: "📊", tool_usages: "🖥️", unusual_activities: "⚠️",
-            users: "👤", webhooks: "🔔", errors: "❌"
+            activities: "⏱️", attendance: "📋", budgets: "📈", clients: "🤝",
+            errorCodes: "⚠️", globalTodos: "📌", holidays: "🎄", integrations: "🔗",
+            insights: "🔮", invites: "✉️", invoices: "🧾", jobSites: "📍",
+            jobSiteVisits: "🚶", limits: "⏰", locations: "🗺️", members: "👥",
+            notes: "📝", organizations: "🏛️", payments: "💳", projects: "📁",
+            rates: "💰", screenshots: "📸", tasks: "✅", teams: "🏢",
+            timeEditLogs: "📜", timeEntries: "🕐", timeOff: "🏖️", timesheets: "📊",
+            toolUsages: "🖥️", users: "👤", webhooks: "🔔"
         };
 
-        let apiData = null;
-        let copyData = {}; // Store copy data separately
+        // File handling for API docs
+        const dropZoneApi = document.getElementById('dropZoneApi');
+        const fileInputApi = document.getElementById('fileInputApi');
 
-        // File handling
-        const dropZone = document.getElementById('dropZone');
-        const fileInput = document.getElementById('fileInput');
-
-        dropZone.addEventListener('click', () => fileInput.click());
-        dropZone.addEventListener('dragover', (e) => {
+        dropZoneApi.addEventListener('click', () => fileInputApi.click());
+        dropZoneApi.addEventListener('dragover', (e) => { e.preventDefault(); dropZoneApi.classList.add('drag-over'); });
+        dropZoneApi.addEventListener('dragleave', () => dropZoneApi.classList.remove('drag-over'));
+        dropZoneApi.addEventListener('drop', (e) => {
             e.preventDefault();
-            dropZone.classList.add('drag-over');
+            dropZoneApi.classList.remove('drag-over');
+            if (e.dataTransfer.files[0]) handleApiFile(e.dataTransfer.files[0]);
         });
-        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
-        dropZone.addEventListener('drop', (e) => {
+        fileInputApi.addEventListener('change', (e) => { if (e.target.files[0]) handleApiFile(e.target.files[0]); });
+
+        // File handling for Tool
+        const dropZoneTool = document.getElementById('dropZoneTool');
+        const fileInputTool = document.getElementById('fileInputTool');
+
+        dropZoneTool.addEventListener('click', () => fileInputTool.click());
+        dropZoneTool.addEventListener('dragover', (e) => { e.preventDefault(); dropZoneTool.classList.add('drag-over'); });
+        dropZoneTool.addEventListener('dragleave', () => dropZoneTool.classList.remove('drag-over'));
+        dropZoneTool.addEventListener('drop', (e) => {
             e.preventDefault();
-            dropZone.classList.remove('drag-over');
-            const file = e.dataTransfer.files[0];
-            if (file && file.name.endsWith('.json')) handleFile(file);
+            dropZoneTool.classList.remove('drag-over');
+            if (e.dataTransfer.files[0]) handleToolFile(e.dataTransfer.files[0]);
         });
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files[0]) handleFile(e.target.files[0]);
-        });
+        fileInputTool.addEventListener('change', (e) => { if (e.target.files[0]) handleToolFile(e.target.files[0]); });
 
-        function handleFile(file) {
-            dropZone.classList.add('has-file');
-            dropZone.innerHTML = `
-                <div class="drop-icon">✅</div>
-                <div class="drop-text">${file.name}</div>
-                <div class="drop-hint">Processing...</div>
-            `;
-
+        function handleApiFile(file) {
             const reader = new FileReader();
             reader.onload = (e) => {
                 try {
                     apiData = JSON.parse(e.target.result);
-                    analyzeAndCompare();
+                    dropZoneApi.classList.add('has-file');
+                    document.getElementById('apiFileName').textContent = '✅ ' + file.name;
+                    updateCompareButton();
                 } catch (error) {
-                    dropZone.classList.remove('has-file');
-                    dropZone.innerHTML = `
-                        <div class="drop-icon">❌</div>
-                        <div class="drop-text">Invalid JSON file</div>
-                        <div class="drop-hint">Please upload a valid hubstaff-api-docs.json</div>
-                    `;
+                    alert('Invalid JSON file. Please upload hubstaff-api-docs.json');
                 }
             };
             reader.readAsText(file);
         }
 
-        function analyzeAndCompare() {
+        function handleToolFile(file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const html = e.target.result;
+                    const parsed = parseToolEndpoints(html);
+                    toolEndpoints = parsed.endpoints;
+                    toolLastEndpoints = parsed.lastEndpoints;
+                    
+                    dropZoneTool.classList.add('has-file');
+                    document.getElementById('toolFileName').textContent = '✅ ' + file.name;
+                    
+                    // Show parse info
+                    const categories = Object.keys(toolEndpoints).length;
+                    const total = Object.values(toolEndpoints).reduce((sum, arr) => sum + arr.length, 0);
+                    document.getElementById('parseStatus').innerHTML = `
+                        <div class="parsed-info">
+                            <strong>Parsed from your tool:</strong> ${total} endpoints across ${categories} categories
+                        </div>
+                    `;
+                    
+                    updateCompareButton();
+                } catch (error) {
+                    console.error(error);
+                    alert('Could not parse the HTML file. Make sure it\'s your Hubstaff API Assistant index.html');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function parseToolEndpoints(html) {
+            const endpoints = {};
+            const lastEndpoints = {};
+            
+            // Find the apiKnowledge object in the HTML
+            const match = html.match(/const\s+apiKnowledge\s*=\s*\{[\s\S]*?^\s{8}\};/m);
+            if (!match) {
+                throw new Error('Could not find apiKnowledge object');
+            }
+            
+            const apiKnowledgeStr = match[0];
+            
+            // Parse each category's endpoints
+            // Match pattern: endpoints: [ ... ]
+            const categoryRegex = /(\w+):\s*\{[^}]*?endpoints:\s*\[([\s\S]*?)\]/g;
+            let categoryMatch;
+            
+            while ((categoryMatch = categoryRegex.exec(apiKnowledgeStr)) !== null) {
+                const categoryName = categoryMatch[1];
+                const endpointsStr = categoryMatch[2];
+                
+                // Parse individual endpoints
+                const endpointRegex = /\{\s*method:\s*"(\w+)",\s*path:\s*"([^"]+)",\s*desc:\s*"([^"]+)"\s*\}/g;
+                let epMatch;
+                const categoryEndpoints = [];
+                let lastEp = null;
+                
+                while ((epMatch = endpointRegex.exec(endpointsStr)) !== null) {
+                    const key = `${epMatch[1]} ${epMatch[2]}`;
+                    categoryEndpoints.push(key);
+                    lastEp = {
+                        method: epMatch[1],
+                        path: epMatch[2],
+                        desc: epMatch[3],
+                        raw: epMatch[0]
+                    };
+                }
+                
+                if (categoryEndpoints.length > 0) {
+                    endpoints[categoryName] = categoryEndpoints;
+                    lastEndpoints[categoryName] = lastEp;
+                }
+            }
+            
+            return { endpoints, lastEndpoints };
+        }
+
+        function updateCompareButton() {
+            const btn = document.getElementById('compareBtn');
+            btn.disabled = !(apiData && toolEndpoints);
+        }
+
+        function togglePasteArea() {
+            const content = document.getElementById('pasteContent');
+            const toggle = document.getElementById('pasteToggle');
+            content.classList.toggle('open');
+            toggle.textContent = content.classList.contains('open') ? '▲' : '▼';
+        }
+
+        function parseFromPaste() {
+            const html = document.getElementById('pasteArea').value;
+            if (!html.trim()) {
+                alert('Please paste your HTML code first');
+                return;
+            }
+
+            try {
+                const parsed = parseToolEndpoints(html);
+                toolEndpoints = parsed.endpoints;
+                toolLastEndpoints = parsed.lastEndpoints;
+                
+                dropZoneTool.classList.add('has-file');
+                document.getElementById('toolFileName').textContent = '✅ Parsed from paste';
+                
+                // Show parse info
+                const categories = Object.keys(toolEndpoints).length;
+                const total = Object.values(toolEndpoints).reduce((sum, arr) => sum + arr.length, 0);
+                document.getElementById('parseStatus').innerHTML = `
+                    <div class="parsed-info">
+                        <strong>Parsed from pasted code:</strong> ${total} endpoints across ${categories} categories
+                    </div>
+                `;
+                
+                // Close paste area
+                document.getElementById('pasteContent').classList.remove('open');
+                document.getElementById('pasteToggle').textContent = '▼';
+                
+                updateCompareButton();
+            } catch (error) {
+                console.error(error);
+                alert('Could not parse the HTML. Make sure you pasted the complete index.html content.');
+            }
+        }
+
+        function runComparison() {
+            // Parse live API endpoints
             const liveEndpoints = {};
             const tagDescriptions = {};
 
@@ -856,47 +885,59 @@
                 Object.entries(apiData.paths).forEach(([path, methods]) => {
                     Object.entries(methods).forEach(([method, details]) => {
                         if (['get', 'post', 'put', 'delete', 'patch'].includes(method)) {
-                            const tag = details.tags ? details.tags[0] : 'other';
-                            if (!liveEndpoints[tag]) liveEndpoints[tag] = [];
-                            liveEndpoints[tag].push({
+                            const apiTag = details.tags ? details.tags[0] : 'other';
+                            const jsCategory = categoryMapping[apiTag] || apiTag;
+                            
+                            if (!liveEndpoints[jsCategory]) {
+                                liveEndpoints[jsCategory] = [];
+                            }
+                            liveEndpoints[jsCategory].push({
                                 method: method.toUpperCase(),
                                 path: path,
                                 description: details.summary || details.description || '',
-                                key: `${method.toUpperCase()} ${path}`
+                                key: `${method.toUpperCase()} ${path}`,
+                                apiTag: apiTag
                             });
                         }
                     });
                 });
             }
 
+            // Find differences
             const changes = [];
             let totalLive = 0;
             let totalCurrent = 0;
 
-            Object.values(currentToolData).forEach(cat => totalCurrent += cat.endpoints.length);
+            // Count current
+            Object.values(toolEndpoints).forEach(arr => totalCurrent += arr.length);
 
-            Object.entries(liveEndpoints).forEach(([category, endpoints]) => {
+            // Check each live endpoint
+            Object.entries(liveEndpoints).forEach(([jsCategory, endpoints]) => {
                 totalLive += endpoints.length;
-                const currentCat = currentToolData[category];
                 
-                if (!currentCat) {
+                const currentCategoryEndpoints = toolEndpoints[jsCategory];
+                
+                if (!currentCategoryEndpoints) {
+                    // New category entirely
                     endpoints.forEach(ep => {
                         changes.push({
                             type: 'new_category',
-                            category,
+                            jsCategory,
+                            apiTag: ep.apiTag,
                             endpoint: ep,
-                            description: tagDescriptions[category] || ''
+                            description: tagDescriptions[ep.apiTag] || ''
                         });
                     });
                 } else {
+                    // Check for new endpoints
                     endpoints.forEach(ep => {
-                        if (!currentCat.endpoints.includes(ep.key)) {
+                        if (!currentCategoryEndpoints.includes(ep.key)) {
                             changes.push({
                                 type: 'new_endpoint',
-                                category,
-                                jsName: currentCat.jsName,
-                                lastEndpoint: currentCat.lastEndpoint,
-                                endpoint: ep
+                                jsCategory,
+                                apiTag: ep.apiTag,
+                                endpoint: ep,
+                                lastEndpoint: toolLastEndpoints[jsCategory]
                             });
                         }
                     });
@@ -912,20 +953,26 @@
 
         function displayResults(changes, totalLive, totalCurrent, tagDescriptions) {
             document.getElementById('resultsSection').classList.add('show');
-            copyData = {}; // Reset copy data
+            copyData = {};
+
+            const newCategories = new Set(changes.filter(c => c.type === 'new_category').map(c => c.jsCategory));
 
             document.getElementById('statsGrid').innerHTML = `
                 <div class="stat-card stat-total">
                     <div class="stat-value">${totalLive}</div>
                     <div class="stat-label">Live API Endpoints</div>
                 </div>
-                <div class="stat-card stat-ok">
+                <div class="stat-card stat-current">
                     <div class="stat-value">${totalCurrent}</div>
                     <div class="stat-label">In Your Tool</div>
                 </div>
                 <div class="stat-card stat-new">
                     <div class="stat-value">${changes.length}</div>
-                    <div class="stat-label">Changes Needed</div>
+                    <div class="stat-label">New Endpoints</div>
+                </div>
+                <div class="stat-card stat-categories">
+                    <div class="stat-value">${newCategories.size}</div>
+                    <div class="stat-label">New Categories</div>
                 </div>
             `;
 
@@ -953,7 +1000,7 @@
                 <div class="info-box warning">
                     <span class="info-icon">⚠️</span>
                     <div class="info-content">
-                        <strong>${changes.length} change${changes.length !== 1 ? 's' : ''} needed!</strong><br>
+                        <strong>${changes.length} new endpoint${changes.length !== 1 ? 's' : ''} found!</strong><br>
                         Follow each step below. Use <span class="keyboard-shortcut"><kbd>⌘</kbd> + <kbd>F</kbd></span> (Mac) or <span class="keyboard-shortcut"><kbd>Ctrl</kbd> + <kbd>F</kbd></span> (Windows) to find code in your file.
                     </div>
                 </div>
@@ -962,16 +1009,14 @@
             let html = '';
             
             changes.forEach((change, index) => {
-                const icon = categoryIcons[change.category] || '📦';
+                const icon = categoryIcons[change.jsCategory] || '📦';
                 const methodClass = `method-${change.endpoint.method.toLowerCase()}`;
                 const changeId = `change-${index}`;
                 
                 if (change.type === 'new_category') {
-                    const title = change.category.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-                    const jsName = change.category.replace(/_([a-z])/g, (g) => g[1].toUpperCase());
+                    const title = change.apiTag.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
                     
-                    // Store the copy data
-                    copyData[`${changeId}-new`] = `${jsName}: {
+                    copyData[`${changeId}-new`] = `${change.jsCategory}: {
     title: "${title}",
     icon: "${icon}",
     description: "${change.description}",
@@ -986,21 +1031,21 @@
                             <div class="change-header new-category">
                                 <div class="change-number purple">${index + 1}</div>
                                 <div class="change-title">
-                                    <h3>🆕 Add entirely new category: ${title}</h3>
-                                    <p>This is a new API category not in your tool yet</p>
+                                    <h3>🆕 New category: ${title}</h3>
+                                    <p>Add to your apiKnowledge object</p>
                                 </div>
                             </div>
                             <div class="change-body">
                                 <p class="helper-text">
-                                    <strong>1. Open your index.html</strong> and press <span class="keyboard-shortcut"><kbd>⌘</kbd> + <kbd>F</kbd></span> to find <code>status: "info"</code> (near the end of apiKnowledge).
+                                    <strong>1. Open your index.html</strong> and find <code>const apiKnowledge = {</code>
                                 </p>
                                 <p class="helper-text">
-                                    <strong>2. After the last category's closing <code>}</code></strong>, add a comma and paste this:
+                                    <strong>2. Add this new category</strong> (before the closing <code>};</code>):
                                 </p>
                                 
                                 <div class="code-block replace-block">
                                     <button class="copy-btn" data-copy-id="${changeId}-new">📋 Copy</button>
-                                    <pre><span class="line new">${jsName}: {</span>
+                                    <pre><span class="line new">${change.jsCategory}: {</span>
 <span class="line new">    title: "${escapeHtml(title)}",</span>
 <span class="line new">    icon: "${icon}",</span>
 <span class="line new">    description: "${escapeHtml(change.description)}",</span>
@@ -1014,9 +1059,11 @@
                         </div>
                     `;
                 } else {
-                    // Store copy data for find and replace
-                    copyData[`${changeId}-find`] = change.lastEndpoint;
-                    copyData[`${changeId}-replace`] = `${change.lastEndpoint},
+                    const lastEp = change.lastEndpoint;
+                    const lastEpStr = lastEp ? lastEp.raw : '// Could not find last endpoint';
+                    
+                    copyData[`${changeId}-find`] = lastEpStr;
+                    copyData[`${changeId}-replace`] = `${lastEpStr},
                     { method: "${change.endpoint.method}", path: "${change.endpoint.path}", desc: "${change.endpoint.description}" }`;
 
                     html += `
@@ -1026,23 +1073,23 @@
                                 <div class="change-title">
                                     <h3>
                                         <span class="method-badge ${methodClass}">${change.endpoint.method}</span>
-                                        Add new endpoint to ${change.jsName}
+                                        Add to ${change.jsCategory}
                                     </h3>
-                                    <p>${icon} ${change.category}</p>
+                                    <p>${icon} ${change.endpoint.path}</p>
                                 </div>
                             </div>
                             <div class="change-body">
                                 <p class="helper-text">
-                                    <strong>1. Open your index.html</strong> and press <span class="keyboard-shortcut"><kbd>⌘</kbd> + <kbd>F</kbd></span> to open Find.
+                                    <strong>1. Open your index.html</strong> and press <span class="keyboard-shortcut"><kbd>⌘</kbd> + <kbd>F</kbd></span>
                                 </p>
 
                                 <div class="find-replace-section">
                                     <div class="section-label find">
-                                        <span>🔍</span> FIND this exact line:
+                                        <span>🔍</span> FIND this line in ${change.jsCategory}:
                                     </div>
                                     <div class="code-block find-block">
                                         <button class="copy-btn" data-copy-id="${changeId}-find">📋 Copy</button>
-                                        <pre><span class="line highlight">${escapeHtml(change.lastEndpoint)}</span></pre>
+                                        <pre><span class="line highlight">${escapeHtml(lastEpStr)}</span></pre>
                                     </div>
                                 </div>
 
@@ -1050,17 +1097,17 @@
 
                                 <div class="find-replace-section">
                                     <div class="section-label replace">
-                                        <span>✏️</span> REPLACE with these lines:
+                                        <span>✏️</span> REPLACE with:
                                     </div>
                                     <div class="code-block replace-block">
                                         <button class="copy-btn" data-copy-id="${changeId}-replace">📋 Copy</button>
-                                        <pre><span class="line unchanged">${escapeHtml(change.lastEndpoint)},</span>
+                                        <pre><span class="line unchanged">${escapeHtml(lastEpStr)},</span>
 <span class="line new">                    { method: "${change.endpoint.method}", path: "${change.endpoint.path}", desc: "${escapeHtml(change.endpoint.description)}" }</span></pre>
                                     </div>
                                 </div>
 
                                 <div class="tip-box">
-                                    <strong>💡 Tip:</strong> You're adding a comma after the existing line, then adding the new endpoint on the next line.
+                                    <strong>💡 Tip:</strong> Add a comma after the existing line, then paste the new endpoint.
                                 </div>
                             </div>
                         </div>
@@ -1070,7 +1117,7 @@
 
             document.getElementById('instructionsContainer').innerHTML = html;
 
-            // Add click handlers for all copy buttons
+            // Add copy handlers
             document.querySelectorAll('.copy-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const copyId = this.getAttribute('data-copy-id');
@@ -1080,14 +1127,13 @@
                         navigator.clipboard.writeText(textToCopy).then(() => {
                             this.textContent = '✅ Copied!';
                             setTimeout(() => this.textContent = '📋 Copy', 2000);
-                        }).catch(err => {
-                            console.error('Copy failed:', err);
-                            this.textContent = '❌ Failed';
-                            setTimeout(() => this.textContent = '📋 Copy', 2000);
                         });
                     }
                 });
             });
+
+            // Scroll to results
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
